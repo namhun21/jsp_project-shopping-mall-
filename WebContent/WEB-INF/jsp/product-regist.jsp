@@ -208,23 +208,8 @@
                                 <input type="text">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <p class="in-name">출시일*</p>
-                            </div>
-                            <div class="col-lg-9">
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <p class="in-name">만료일*</p>
-                            </div>
-                            <div class="col-lg-9">
-                                <input type="text">
-                            </div>
-                        </div>
                         
+           
                     </div>
                     <div class="col-lg-3">
                         <div class="order-table">
