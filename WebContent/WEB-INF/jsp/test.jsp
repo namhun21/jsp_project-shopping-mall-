@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<jsp:include page = "nav.jsp"/>
+	<jsp:include page = "nav_client.jsp"/>
 	 <!-- Page Preloder -->
     <div id="preloder" style = "display: none;"> 
         <div class="loader" style = "display: none;"></div>
