@@ -25,9 +25,9 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    
+    -->
 	<style>
 	.photoFrame{
       width: 300px;
@@ -56,6 +56,7 @@
             display: block;
         }
 	</style>
+	
 </head>
 
 <body>
@@ -95,14 +96,8 @@
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a href="productmanage">상품관리</a></li>
-                        <li><a href="productregist">상품등록</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">상의</a></li>
-                                <li><a href="#">하의</a></li>
-                                <li><a href="#">신발</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"></a></li>
+                        <li><a href="productregist">상품등록</a></li>
+                
                         <li><a href="#">사용자관리</a></li>
                         <li><a href="#">주문관리</a></li>
                     </ul>
@@ -157,7 +152,7 @@
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
         <div class="container">
-            <form action="#" class="checkout-form">
+            <form action="productregistprocess" method = "post" class="checkout-form">
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>상품 정보</h3>
@@ -168,7 +163,7 @@
                                 <p class="in-name">Name*</p>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" placeholder="상품명*">
+                                <input type="text" placeholder="상품명*" name = "pName">
                             </div>
                         </div>
                         <div class="row">
@@ -176,8 +171,8 @@
                                 <p class="in-name">상품 설명*</p>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text">
-                                <input type="text">
+                                <input type="text" name = "pContent">
+                            
                             </div>
                         </div>
                         <div class="row">
@@ -185,8 +180,8 @@
                                 <p class="in-name">카테고리*</p>
                             </div>
                             <div class="col-lg-9">
-                                <select class="cart-select country-usa">
-                                    <option value = "1">상의</option>
+                                <select class="cart-select country-usa" name = "categoryCode">
+                                    <option value = "1" >상의</option>
                                     <option value = "2">하의</option>
                                     <option value = "3">신발</option>
                                 </select>
@@ -197,7 +192,7 @@
                                 <p class="in-name">상품가격*</p>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text">
+                                <input type="text" name = "price">
                             </div>
                         </div>
                         <div class="row">
@@ -205,7 +200,7 @@
                                 <p class="in-name">수량*</p>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text">
+                                <input type="text" name= "stock">
                             </div>
                         </div>
                         
@@ -224,7 +219,7 @@
                             	
                             	</div>
                             	<label class = "btn btn-primary btn-file">
-                            		파일추가<input type = "file" id= "uploadFile" name = "uploadFile"  accept = "image/*" >
+                            		파일추가<input type = "file" accept = "image/*" >
                             	</label>
                             </div>
                         </div>
@@ -243,6 +238,7 @@
     <!-- Cart Total Page End -->
   
 </body>
+<!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type = "text/javascript">
 	var uploadFile = document.getElementById("uploadFile");
@@ -265,4 +261,5 @@
 		}
 	})
 </script>
+ -->
 </html>

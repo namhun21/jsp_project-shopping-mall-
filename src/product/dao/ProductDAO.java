@@ -3,12 +3,24 @@ package product.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-
-
+import pagelist.vo.PageList;
+import product.vo.ProductVO;
 import util.DBconn;
 
 public class ProductDAO {
+	
+	public static ProductDAO productDAO;
+	private ProductDAO() {}
+	public static ProductDAO getInstance() {
+		if(productDAO == null) {
+			productDAO = new ProductDAO();
+		}
+		return productDAO;
+	}
 	public int selectGetProductId() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -16,12 +28,17 @@ public class ProductDAO {
 		int result = 0;
 		
 		conn = DBconn.getInstance().getConnection();
-		String sql = "select pid from product where rownum<2 order by pid desc";
+		String sql = "select pid from product order by pid desc";
+		System.out.println("select문 실행");
 		try {
+			System.out.println("sql등록");
 			pstmt = conn.prepareStatement(sql);
+			System.out.println("pstmt실행");
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				result = rs.getInt(1);
+				System.out.println("select 이후 result"+result);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,22 +53,153 @@ public class ProductDAO {
 		ResultSet rs = null;
 		int result = 0;
 		conn = DBconn.getInstance().getConnection();
-		String sql = "insert into product values(?,?,?,?,?,?,?,sysdate,0,0)";
+		System.out.println("insert");
+		String sql = "insert into product values(?,?,?,?,?,?,?,sysdate,0,0,0)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pId);
 			pstmt.setString(2, pName);
-			pstmt.setString(3, pName);
-			pstmt.setString(4, pContent);
+			pstmt.setString(3, pContent);
+			pstmt.setInt(4, categoryCode);
 			pstmt.setInt(5, price);
 			pstmt.setInt(6, stock);
 			pstmt.setString(7, product_img);
 			result = pstmt.executeUpdate();
+			System.out.println("insert 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBconn.close(conn, pstmt, rs);
 		}
 		return result;
+	}
+	public ArrayList<ProductVO> selectProducts(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<ProductVO> plist = null;
+		
+		conn = DBconn.getInstance().getConnection();
+		String sql = "select * from product";
+		try {
+			plist = new ArrayList<ProductVO>();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+			ProductVO productVO = new ProductVO();
+			productVO.setPname(rs.getString("pID"));
+			productVO.setPname(rs.getString("pName"));
+			productVO.setPname(rs.getString("pContent"));
+			productVO.setPname(rs.getString("categoryCode"));
+			productVO.setPname(rs.getString("price"));
+			productVO.setPname(rs.getString("stock"));
+			productVO.setPname(rs.getString("product_img"));
+			productVO.setPname(rs.getString("product_regist"));
+			productVO.setPname(rs.getString("product_hit"));
+			productVO.setPname(rs.getString("product_reply_cnt"));
+			plist.add(productVO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBconn.close(conn, pstmt, rs);
+		}
+		return plist;
+	}
+	public int deleteProduct(int pId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		conn = DBconn.getInstance().getConnection();
+		String sql = "update product set isdelete = 1 where pid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pId);
+			result = pstmt.executeUpdate();
+			System.out.println("Delete 완료");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBconn.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	public PageList listAll(int currentPageNumber, int pageSize, int blockSize) throws Exception{
+		PageList pageList = null;
+		List<ProductVO> list = null;
+		int totalCount = ProductDAO.getInstance().getCount();
+		if(totalCount<=0) {
+			return null;
+		}
+		System.out.println("totalCount: "+totalCount);
+		pageList = new PageList(currentPageNumber,pageSize,blockSize,totalCount);
+		list = ProductDAO.getInstance().listAll(pageList.getStartNo(),pageList.getEndNo());
+		pageList.setList(list);
+		return pageList;
+	}
+	// 상품 목록 전체 리스트
+		public List<ProductVO> listAll(int startNo, int endNo) throws SQLException {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			List<ProductVO> list = null;
+			ResultSet rs = null;
+			try {
+				conn = DBconn.getInstance().getConnection();
+				pstmt = conn.prepareStatement("select * from product where rownum > ? and rownum< ? order by pid desc");
+				pstmt.setInt(1, startNo-1);
+				pstmt.setInt(2, endNo-startNo+1);
+				rs = pstmt.executeQuery();
+				list = new ArrayList<>();
+				while (rs.next()) {
+					ProductVO productVO = new ProductVO();
+					productVO.setPname(rs.getString("pID"));
+					productVO.setPname(rs.getString("pName"));
+					productVO.setPname(rs.getString("pContent"));
+					productVO.setPname(rs.getString("categoryCode"));
+					productVO.setPname(rs.getString("price"));
+					productVO.setPname(rs.getString("stock"));
+					productVO.setPname(rs.getString("product_img"));
+					productVO.setPname(rs.getString("product_regist"));
+					productVO.setPname(rs.getString("product_hit"));
+					productVO.setPname(rs.getString("product_reply_cnt"));
+					list.add(productVO);	
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+	
+	public int getCount() throws SQLException {
+		int cnt = 0;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconn.getInstance().getConnection();
+			pstmt = conn.prepareStatement("select count(*) from product");
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt(1);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt!= null) {
+				pstmt.close();
+			}
+			if(rs!=null) {
+				rs.close();
+			}
+			if(conn!=null) {
+				conn.close();
+			}
+		}
+		
+		return cnt;
 	}
 }
