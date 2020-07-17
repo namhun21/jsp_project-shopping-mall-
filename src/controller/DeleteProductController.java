@@ -1,23 +1,31 @@
 package controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import product.dao.ProductDAO;
+
 /**
- * Servlet implementation class MainController
+ * Servlet implementation class DeleteProductController
  */
-@WebServlet("/main")
-public class MainController extends HttpServlet {
+@WebServlet("/deleteproduct")
+public class DeleteProductController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/product-manage.jsp");
-		rd.forward(request, response);
+		ProductDAO productDAO = ProductDAO.getInstance();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		int pId = Integer.parseInt(request.getParameter("pid"));
+		try {
+			productDAO.deleteProduct(pId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.getWriter().write(1+"");
 	}
 
 	/**

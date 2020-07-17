@@ -31,7 +31,7 @@ public class ProductRegistProcessController extends HttpServlet {
 		int result = productdao.insertProduct(pId, pName, pContent, categoryCode, price, stock, product_img);
 		
 		if(result!= 0) {
-			response.sendRedirect("admin");
+			response.sendRedirect("productmanage");
 		}
 	}
 

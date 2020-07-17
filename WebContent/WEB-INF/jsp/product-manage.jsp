@@ -5,7 +5,7 @@
 <%@ page import="product.dao.ProductDAO"%>
 <%@ page import="product.vo.ProductVO" %>
 <%@ page import="pagelist.vo.PageList" %>
-<%@ include file = "pagelist.jsp" %>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -30,7 +30,10 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     -->
 	<style>
@@ -62,10 +65,14 @@
         }
 	</style>
 </head>
+
 <%
-	ProductDAO productDAO = ProductDAO.getInstance();
-	PageList listAll = productDAO.listAll(currentPage, pageSize, blockSize);
-	pageContext.setAttribute("page", listAll);
+	//ProductDAO productDAO = ProductDAO.getInstance();	
+	//PageList listAll = productDAO.listAll(currentPage, pageSize, blockSize);
+	
+	//pageContext.setAttribute("page", listAll,PageContext.SESSION_SCOPE);
+	PageList listAll = (PageList)request.getAttribute("page");
+	int count = (int)request.getAttribute("count");
 %>
 <body>
     <!-- Page Preloder -->
@@ -153,13 +160,16 @@
         </div>
     </section>
     <!-- Page Add Section End -->
-    
+    <%
+    	
+    %>
         <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h3>상품 리스트</h3>
+                    (총 레코드 수 : <%= count %>)
                 </div>
                 <table class="table">
                             <thead>
@@ -176,7 +186,7 @@
                             <tbody>
                             	<c:forEach var="listAll" items="${page.list}">
                             	<tr>
-                                    <th scope="row"><b>${listAll.pid }</b></th>
+                                    <th scope="row"><b>${listAll.pname }</b></th>
                                     <td><b>
                                     <c:if test="${listAll.categorycode eq 1 }">상의</c:if>
                                     <c:if test="${listAll.categorycode eq 2 }">하의</c:if>
@@ -185,36 +195,28 @@
                                     <td><b>${listAll.price }</b></td>
                                     <td>${listAll.pcontent }</td>
                                     <td>${listAll.product_hit }</td>
-                                    <td>${listAll.product_reply_cnt }</td>
-                                    <!-- 
+                                    <td>${listAll.product_reply_cnt }</td> 
                                     <td><button type="button" class="delete_${listAll.pid}_btn"
-											data-gdsNum="${listAll.pid}">삭제</button></td>
-									<c:url var="url" value="../admin/bootReSell.jsp">
-										<c:param name="gdsNum" value="${listAll.gdsNum}" />
-										<c:param name="gdsEndDate" value="${listAll.gdsEndDate }"/>
-										<c:param name="gdsStock" value="${listAll.gdsStock }"/>
-		
-									</c:url>
-									-->
-                                </tr>
-                                <script>
-											$(".delete_${listAll.gdsNum}_btn").click(function() {
+											data-pid="${listAll.pid}">삭제</button></td>                                   
+                                </tr>    
+                                <script type = "text/javascript">
+											$(".delete_${listAll.pid}_btn").click(function() {
 																var confirm_val = confirm("정말 삭제하시겠습니까?");
 																if (confirm_val) {
 												
-																	var gdsNum = $(this).attr("data-gdsNum");
-																	console.log(gdsNum);
+																	var pid = $(this).attr("data-pid");
+																	console.log(pid);
 																	$.ajax({
-																				url : "../DeleteGoodsAjax",
+																				url : "deleteproduct",
 																				type : "post",
 																				dataType : "json",
 																				async : false,
 																				data : {
-																					gdsNum : gdsNum
+																					pid : pid
 																				},
 																				success : function(result) {
 																					if (result == 1) {
-																						location.href = "../view/admin.jsp";
+																						location.href = "productmanage";
 																					} else {
 																						alert("삭제 실패");
 																					}
@@ -225,7 +227,7 @@
 																			});
 																}
 															});
-										</script>
+										</script>                            
                             	</c:forEach>
                             </tbody>
                         </table>    
@@ -233,6 +235,55 @@
                 
             </div>
         </div>
+        <div id="paginationBox" class="mb-3">
+				<ul class="pagination">
+					<c:if test="${! page.isEmpty() }">
+						<!-- 게시판개수가 0이 아니라면 -->
+
+
+
+						<c:if test="${page.startPage > 1}">
+							<!-- 시작페이지가 1이상 즉 11 21 31 .... -->
+							<c:url var="url" value="productmanage">
+								<c:param name="currentPage" value="${page.startPage-1}" />
+								<c:param name="pageSize" value="${page.pageSize }" />
+								<c:param name="blockSize" value="${page.blockSize }" />
+							</c:url>
+							<li class="page-item"><a class="page-link" href="${url }">이전</a>
+						</c:if>
+						<c:forEach var="i" begin="${page.startPage }"
+							end="${page.endPage }">
+							<%-- 현재 페이지는 링크가 생기지 않게 한다. --%>
+							<li class="page-item active"><c:if
+									test="${i eq page.currentPage }">
+									<a class="page-link" href="#">${i}</a>
+								</c:if></li>
+
+							<%-- 그 외 페이지는 다시 리턴 하면서 호출 --%>
+							<li class="page-item"><c:if test="${i ne page.currentPage }">
+
+									<c:url var="url" value="productmanage">
+										<c:param name="currentPage" value="${i}" />
+										<c:param name="pageSize" value="${page.pageSize }" />
+										<c:param name="blockSize" value="${page.blockSize }" />
+									</c:url>
+									<a class="page-link" href="${url }">${i }</a>
+
+								</c:if></li>
+						</c:forEach>
+						<%-- 마지막 페이지 번호가 전체페이지 수보다 적다면 다음 페이지가 존재한다. --%>
+
+						<c:if test="${page.endPage < page.totalPage }">
+							<li class="page-item"><c:url var="url" value="productmanage">
+									<c:param name="currentPage" value="${page.endPage+1}" />
+									<c:param name="pageSize" value="${page.pageSize }" />
+									<c:param name="blockSize" value="${page.blockSize }" />
+								</c:url> <a class="page-link" href="${url }">다음</a></li>
+						</c:if>
+					</c:if>
+				</ul>
+			</div>
+     
     </section>
     <!-- Cart Total Page End -->
 
