@@ -1,11 +1,12 @@
 package pagelist.vo;
 
 import java.util.List;
+import user.vo.UserVO;
 
-import product.vo.ProductVO;
 
-public class PageList {
-	private List<ProductVO> list;
+
+public class UserPageList {
+	private List<UserVO> list;
 	private int currentPage; 	// 현재페이지
 	private int pageSize;		// 1페이지당 갯수 정해짐
 	
@@ -19,7 +20,7 @@ public class PageList {
 	private int endPage; 	// 페이지 마지막 번호
 	private int blockSize;	// 페이지의 개수
 	
-	public PageList( int currentPage, int pageSize,int blockSize,
+	public UserPageList( int currentPage, int pageSize,int blockSize,
 			int totalBoardCount) {
 		super();
 		
@@ -38,7 +39,7 @@ public class PageList {
 		if(totalBoardCount == 0) {
 			totalPage =0;
 		} else {
-			totalPage = totalBoardCount / pageSize; // mysql은 인덱스 1부터 시작
+			totalPage = totalBoardCount / pageSize; // 인덱스 1부터 시작
 			if(totalBoardCount % pageSize > 0)
 				totalPage++;
 		}
@@ -69,10 +70,10 @@ public class PageList {
 		
 		System.out.println("endPage:"+endPage);
 	}
-	public void setList(List<ProductVO> list) {
+	public void setList(List<UserVO> list) {
 		this.list = list;
 	}
-	public List<ProductVO> getList() {
+	public List<UserVO> getList() {
 		return list;
 	}
 	public int getCurrentPage() {

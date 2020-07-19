@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pagelist.vo.PageList;
+import pagelist.vo.ProductPageList;
 import product.dao.ProductDAO;
 
 /**
@@ -41,7 +41,7 @@ public class ProductManageController extends HttpServlet {
 //		request.setAttribute("pageSize", pageSize);
 //		request.setAttribute("blockSize", blockSize);
 		ProductDAO productDAO = ProductDAO.getInstance();
-		PageList listAll = null;
+		ProductPageList listAll = null;
 		int count = 0;
 		try {
 			listAll = productDAO.listAll(currentPage, pageSize, blockSize);

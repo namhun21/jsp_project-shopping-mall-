@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="product.dao.ProductDAO"%>
-<%@ page import="product.vo.ProductVO" %>
-<%@ page import="pagelist.vo.ProductPageList" %>
+<%@ page import="user.dao.UserDAO"%>
+<%@ page import="user.vo.UserVO" %>
+<%@ page import="pagelist.vo.UserPageList" %>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
     <%@include file = "header.jsp" %>
-    <title>상품 등록</title>
+    <title>사용자 관리</title>
 	
 	<style>
 	.photoFrame{
@@ -43,11 +43,8 @@
 </head>
 
 <%
-	//ProductDAO productDAO = ProductDAO.getInstance();	
-	//PageList listAll = productDAO.listAll(currentPage, pageSize, blockSize);
 	
-	//pageContext.setAttribute("page", listAll,PageContext.SESSION_SCOPE);
-	ProductPageList listAll = (ProductPageList)request.getAttribute("page");
+	UserPageList listAll = (UserPageList)request.getAttribute("page");
 	int count = (int)request.getAttribute("count");
 %>
 <body>
@@ -80,12 +77,12 @@
                 <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">상품명</th>
-                                    <th scope="col">카테고리</th>
-                                    <th scope="col">상품가격</th>
-                                    <th scope="col">상품설명</th>
-                                    <th scope="col">추천수</th>
-                                    <th scope="col">댓글수</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">주소</th>
+                                    <th scope="col">햔드폰번호</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col">관리자 여부</th>
                                     <th scope="col">삭제</th>
                                 </tr>
                             </thead>
@@ -93,11 +90,7 @@
                             	<c:forEach var="listAll" items="${page.list}">
                             	<tr>
                                     <th scope="row"><b>${listAll.pname }</b></th>
-                                    <td><b>
-                                    <c:if test="${listAll.categorycode eq 1 }">상의</c:if>
-                                    <c:if test="${listAll.categorycode eq 2 }">하의</c:if>
-                                    <c:if test="${listAll.categorycode eq 3 }">신빌</c:if>
-                                    </b></td>
+                                    <td><b>${listAll.price }</b></td>
                                     <td><b>${listAll.price }</b></td>
                                     <td>${listAll.pcontent }</td>
                                     <td>${listAll.product_hit }</td>

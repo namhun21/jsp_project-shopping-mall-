@@ -5,29 +5,10 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Yoga Studio Template">
-    <meta name="keywords" content="Yoga, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%@ include file = "header.jsp" %>
     <title>상품 등록</title>
 	
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-	<!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    -->
+   
 	<style>
 	.photoFrame{
       width: 300px;
@@ -63,75 +44,7 @@
     <!-- Page Preloder -->
    
     
-    <!-- Search model -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
-
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="container-fluid">
-            <div class="inner-header">
-                <div class="logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                </div>
-                <div class="header-right">
-                    <img src="img/icons/search.png" alt="" class="search-trigger">
-                    <img src="img/icons/man.png" alt="">
-                    <a href="#">
-                        <img src="img/icons/bag.png" alt="">
-                        <span>2</span>
-                    </a>
-                </div>
-                <div class="user-access">
-                    <a href="#">Register</a>
-                    <a href="#" class="in">Sign in</a>
-                </div>
-                <nav class="main-menu mobile-menu">
-                    <ul>
-                        <li><a href="productmanage">상품관리</a></li>
-                        <li><a href="productregist">상품등록</a></li>
-                
-                        <li><a href="#">사용자관리</a></li>
-                        <li><a href="#">주문관리</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- Header Info Begin -->
-    <div class="header-info">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="header-item">
-                        <img src="img/icons/delivery.png" alt="">
-                        <p>Free shipping on orders over $30 in USA</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-left text-lg-center">
-                    <div class="header-item">
-                        <img src="img/icons/voucher.png" alt="">
-                        <p>20% Student Discount</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-left text-xl-right">
-                    <div class="header-item">
-                    <img src="img/icons/sales.png" alt="">
-                    <p>30% off on dresses. Use code: 30OFF</p>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header Info End -->
-    <!-- Header End -->
+   <%@ include file = "nav_admin.jsp" %>
 	<!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
@@ -152,7 +65,7 @@
     <!-- Cart Total Page Begin -->
     <section class="cart-total-page spad">
         <div class="container">
-            <form action="productregistprocess" method = "post" class="checkout-form">
+            <form action="productregistprocess" method = "post" class="checkout-form" enctype ="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>상품 정보</h3>
@@ -211,15 +124,17 @@
                             <div class="cart-item">
                                 <span>사진 등록</span>
                             </div>
-                            <div class = "inputArea">
+                            <div class = "inputArea" >
                             	<div class="cart-item">
                                 <span>이미지</span>
                             </div>
-                            	<div id = "pictures">
+                            	<div id = 'preview'>
                             	
                             	</div>
+                            	<br>
                             	<label class = "btn btn-primary btn-file">
-                            		파일추가<input type = "file" accept = "image/*" >
+                            		사진등록<input type ="file" id = 'upload' name = 'upload' accept = "image/*">
+                            		<input type = "hidden" id = 'img_name' name = 'img_name'>
                             	</label>
                             </div>
                         </div>
@@ -238,28 +153,50 @@
     <!-- Cart Total Page End -->
   
 </body>
-<!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type = "text/javascript">
-	var uploadFile = document.getElementById("uploadFile");
-	//값이 변경될때 호출되는 이벤트 리스너
-	uploadFile.addEventListener('change',function(e){
-		var file = e.target.files[0]; //선택된 파일
-		var reader = new FileReader();
-		reader.readAsDataURL(file); // 파일을 읽는 메소드
-		
-		reader.onload = fucction(){
-			var photoFrame = document.createElement("div");
-			photoFrame.style = 'background : url(${reader.result}); background-size : cover';
-			photoFrame.className = "photoFrame";
-			document.getElementById("pictures").appendChild(photoFrame);
-			e.target.value = "";
-			
-			photoFrame.addEventListener("click",function(){
-				document.getElementById("pictures").removeChild(photoFrame);
-			})
-		}
-	})
+
+<script type= "text/javascript">
+var upload = document.querySelector('#upload');
+var preview = document.querySelector('#preview');
+
+upload.addEventListener('change',function (e) {
+    var get_file = e.target.files;
+
+    var image = document.createElement('img');
+
+    /* FileReader 객체 생성 */
+    var reader = new FileReader();
+
+    /* reader 시작시 함수 구현 */
+    reader.onload = (function (aImg) {
+        console.log(1);
+
+        return function (e) {
+            console.log(3);
+            /* base64 인코딩 된 스트링 데이터 */
+            aImg.src = e.target.result
+        }
+    })(image)
+
+    if(get_file){
+        /* 
+            get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+            onload 에 설정했던 return 으로 넘어간다.
+            이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+        */
+        reader.readAsDataURL(get_file[0]);
+        console.log(2);
+    }
+
+    preview.appendChild(image);
+    var fileValue = $("#upload").val().split("\\");
+	var fileName = fileValue[fileValue.length-1];
+	console.log(fileName);
+	
+})
+
+    
+
 </script>
- -->
+
+
 </html>

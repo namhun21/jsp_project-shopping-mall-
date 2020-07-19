@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pagelist.vo.PageList;
+import pagelist.vo.ProductPageList;
 import product.vo.ProductVO;
 import util.DBconn;
 
@@ -128,8 +128,8 @@ public class ProductDAO {
 		return result;
 	}
 	
-	public PageList listAll(int currentPageNumber, int pageSize, int blockSize) throws Exception{
-		PageList pageList = null;
+	public ProductPageList listAll(int currentPageNumber, int pageSize, int blockSize) throws Exception{
+		ProductPageList pageList = null;
 		List<ProductVO> list = null;
 		ProductDAO productDAO = ProductDAO.getInstance();
 		int totalCount = productDAO.getCount();
@@ -140,7 +140,7 @@ public class ProductDAO {
 		
 		System.out.println("currentPage :"+currentPageNumber);
 		
-		pageList = new PageList(currentPageNumber,pageSize,blockSize,totalCount);
+		pageList = new ProductPageList(currentPageNumber,pageSize,blockSize,totalCount);
 		System.out.println(pageList.getStartNo());
 		System.out.println(pageList.getEndNo());
 		list = productDAO.listAll(pageList.getStartNo(),pageList.getEndNo());

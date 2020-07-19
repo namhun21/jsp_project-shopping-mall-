@@ -1,34 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Yoga Studio Template">
-    <meta name="keywords" content="Yoga, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-<!-- body에 page preloader추가해야함 main에 -->
-<body>
+<!-- Page Preloder -->
    
+    
     <!-- Search model -->
 	<div class="search-model">
 		<div class="h-100 d-flex align-items-center justify-content-center">
@@ -45,7 +20,7 @@
         <div class="container-fluid">
             <div class="inner-header">
                 <div class="logo">
-                    <a href="admin"><img src="img/logo.png" alt=""></a>
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
                 </div>
                 <div class="header-right">
                     <img src="img/icons/search.png" alt="" class="search-trigger">
@@ -61,15 +36,8 @@
                 </div>
                 <nav class="main-menu mobile-menu">
                     <ul>
-                        <!--  <li><a class="active" href="./index.html">Home</a></li>-->
                         <li><a href="productmanage">상품관리</a></li>
-                        <li><a href="productregist">상품등록</a>
-	                        <ul class="sub-menu">
-	                                <li><a href="#">상의</a></li>
-	                                <li><a href="#">하의</a></li>
-	                                <li><a href="#">신발</a></li>
-	                        </ul>
-                        </li>
+                        <li><a href="productregist">상품등록</a></li>
                         <li><a href="#">사용자관리</a></li>
                         <li><a href="#">주문관리</a></li>
                     </ul>
@@ -104,16 +72,3 @@
     </div>
     <!-- Header Info End -->
     <!-- Header End -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
-
-</html>
