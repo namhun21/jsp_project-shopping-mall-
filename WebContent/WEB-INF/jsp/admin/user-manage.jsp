@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="product.dao.ProductDAO"%>
-<%@ page import="product.vo.ProductVO" %>
-<%@ page import="pagelist.vo.ProductPageList" %>
+<%@ page import="user.dao.UserDAO"%>
+<%@ page import="user.vo.UserVO" %>
+<%@ page import="pagelist.vo.UserPageList" %>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <%@include file = "header.jsp" %>
-    <title>상품 등록</title>
+    <%@include file = "../../../include/header.jsp" %>
+    <title>사용자 관리</title>
 	
 	<style>
 	.photoFrame{
@@ -43,15 +43,12 @@
 </head>
 
 <%
-	//ProductDAO productDAO = ProductDAO.getInstance();	
-	//PageList listAll = productDAO.listAll(currentPage, pageSize, blockSize);
 	
-	//pageContext.setAttribute("page", listAll,PageContext.SESSION_SCOPE);
-	ProductPageList listAll = (ProductPageList)request.getAttribute("page");
+	UserPageList listAll = (UserPageList)request.getAttribute("page");
 	int count = (int)request.getAttribute("count");
 %>
 <body>
-    <%@include file = "nav_admin.jsp" %>
+    <%@include file = "../../../include/nav_admin.jsp" %>
 	<!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
@@ -74,55 +71,54 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>상품 리스트</h3>
+                    <h3>사용자 리스트</h3>
                     (총 레코드 수 : <%= count %>)
                 </div>
                 <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">상품명</th>
-                                    <th scope="col">카테고리</th>
-                                    <th scope="col">상품가격</th>
-                                    <th scope="col">상품설명</th>
-                                    <th scope="col">추천수</th>
-                                    <th scope="col">댓글수</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">주소</th>
+                                    <th scope="col">핸드폰번호</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col">관리자 여부</th>
                                     <th scope="col">삭제</th>
                                 </tr>
                             </thead>
                             <tbody>
                             	<c:forEach var="listAll" items="${page.list}">
                             	<tr>
-                                    <th scope="row"><b>${listAll.pname }</b></th>
-                                    <td><b>
-                                    <c:if test="${listAll.categorycode eq 1 }">상의</c:if>
-                                    <c:if test="${listAll.categorycode eq 2 }">하의</c:if>
-                                    <c:if test="${listAll.categorycode eq 3 }">신발</c:if>
-                                    </b></td>
-                                    <td><b>${listAll.price }</b></td>
-                                    <td>${listAll.pcontent }</td>
-                                    <td>${listAll.product_hit }</td>
-                                    <td>${listAll.product_reply_cnt }</td> 
-                                    <td><button type="button" class="delete_${listAll.pid}_btn"
-											data-pid="${listAll.pid}">삭제</button></td>                                   
+                                    <th scope="row"><b>${listAll.userId }</b></th>
+                                    <td><b>${listAll.userName }</b></td>
+                                    <td><b>${listAll.userAddress }</b></td>
+                                    <td>${listAll.userPhNumber }</td>
+                                    <td>${listAll.userEmail }</td>
+                                    <td>
+                                    <c:if test="${listAll.isAdmin eq 0 }">N</c:if>
+                                    <c:if test="${listAll.isAdmin eq 1 }">Y</c:if>
+                                    </td> 
+                                    <td><button type="button" class="delete_${listAll.userId}_btn"
+											data-userId="${listAll.userId}">삭제</button></td>                                   
                                 </tr>    
                                 <script type = "text/javascript">
-											$(".delete_${listAll.pid}_btn").click(function() {
+											$(".delete_${listAll.userId}_btn").click(function() {
 																var confirm_val = confirm("정말 삭제하시겠습니까?");
 																if (confirm_val) {
 												
-																	var pid = $(this).attr("data-pid");
-																	console.log(pid);
+																	var userId = $(this).attr("data-userId");
+																	console.log(userId);
 																	$.ajax({
-																				url : "deleteproduct",
+																				url : "deleteuser",
 																				type : "post",
 																				dataType : "json",
 																				async : false,
 																				data : {
-																					pid : pid
+																					userId : userId
 																				},
 																				success : function(result) {
 																					if (result == 1) {
-																						location.href = "productmanage";
+																						location.href = "usermanage";
 																					} else {
 																						alert("삭제 실패");
 																					}
@@ -150,10 +146,10 @@
 
 						<c:if test="${page.startPage > 1}">
 							<!-- 시작페이지가 1이상 즉 11 21 31 .... -->
-							<c:url var="url" value="productmanage">
-								<c:param name="currentPage" value="${page.startPage-1}" />
-								<c:param name="pageSize" value="${page.pageSize }" />
-								<c:param name="blockSize" value="${page.blockSize }" />
+							<c:url var="url" value="usermanage">
+								<c:param name="userCurrentPage" value="${page.startPage-1}" />
+								<c:param name="userPageSize" value="${page.pageSize }" />
+								<c:param name="userBlockSize" value="${page.blockSize }" />
 							</c:url>
 							<li class="page-item"><a class="page-link" href="${url }">이전</a>
 						</c:if>
@@ -168,10 +164,10 @@
 							<%-- 그 외 페이지는 다시 리턴 하면서 호출 --%>
 							<li class="page-item"><c:if test="${i ne page.currentPage }">
 
-									<c:url var="url" value="productmanage">
-										<c:param name="currentPage" value="${i}" />
-										<c:param name="pageSize" value="${page.pageSize }" />
-										<c:param name="blockSize" value="${page.blockSize }" />
+									<c:url var="url" value="usermanage">
+										<c:param name="userCurrentPage" value="${i}" />
+										<c:param name="userPageSize" value="${page.pageSize }" />
+										<c:param name="userBlockSize" value="${page.blockSize }" />
 									</c:url>
 									<a class="page-link" href="${url }">${i }</a>
 
@@ -180,10 +176,10 @@
 						<%-- 마지막 페이지 번호가 전체페이지 수보다 적다면 다음 페이지가 존재한다. --%>
 
 						<c:if test="${page.endPage < page.totalPage }">
-							<li class="page-item"><c:url var="url" value="productmanage">
-									<c:param name="currentPage" value="${page.endPage+1}" />
-									<c:param name="pageSize" value="${page.pageSize }" />
-									<c:param name="blockSize" value="${page.blockSize }" />
+							<li class="page-item"><c:url var="url" value="usermanage">
+									<c:param name="userCurrentPage" value="${page.endPage+1}" />
+									<c:param name="userPageSize" value="${page.pageSize }" />
+									<c:param name="userBlockSize" value="${page.blockSize }" />
 								</c:url> <a class="page-link" href="${url }">다음</a></li>
 						</c:if>
 					</c:if>

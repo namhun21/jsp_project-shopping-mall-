@@ -5,7 +5,7 @@
 <html lang="zxx">
 
 <head>
-    <%@ include file = "header.jsp" %>
+    <%@ include file = "../../../include/header.jsp" %>
     <title>상품 등록</title>
 	
    
@@ -44,7 +44,7 @@
     <!-- Page Preloder -->
    
     
-   <%@ include file = "nav_admin.jsp" %>
+   <%@ include file = "../../../include/nav_admin.jsp" %>
 	<!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">

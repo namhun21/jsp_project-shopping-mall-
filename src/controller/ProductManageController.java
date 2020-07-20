@@ -53,7 +53,7 @@ public class ProductManageController extends HttpServlet {
 		
 		request.setAttribute("page", listAll);
 		request.setAttribute("count", count);
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/product-manage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/admin/product-manage.jsp");
 		rd.forward(request, response);
 	}
 

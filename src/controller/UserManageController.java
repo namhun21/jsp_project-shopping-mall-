@@ -55,7 +55,7 @@ public class UserManageController extends HttpServlet {
 		request.setAttribute("page", listAll);
 		request.setAttribute("count", count);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/user-manage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/admin/user-manage.jsp");
 		rd.forward(request, response);
 	}
 

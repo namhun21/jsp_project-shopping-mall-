@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductRegistController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/product-regist.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/admin/product-regist.jsp");
 		rd.forward(request, response);
 	}
 
