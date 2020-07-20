@@ -23,28 +23,30 @@ public class UserManageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// 현재페이지 번호
-		int currentPage = 1; // 초기값 
+		int userCurrentPage = 1; // 초기값 
 		// 목록개수
-		int pageSize = 3;
+		int userPageSize = 3;
 		// 블록크기
-		int blockSize = 10;
+		int userBlockSize = 10;
+		
 		try{
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-			System.out.println("currentpage:"+currentPage);
-			pageSize = Integer.parseInt(request.getParameter("pageSize"));
-			System.out.println("pageSize: "+pageSize);
-			blockSize = Integer.parseInt(request.getParameter("blockSize"));
-			System.out.println("blockSize: "+blockSize);
+			userCurrentPage = Integer.parseInt(request.getParameter("userCurrentPage"));
+			System.out.println("userCurrentPage:"+userCurrentPage);
+			userPageSize = Integer.parseInt(request.getParameter("userPageSize"));
+			System.out.println("userPageSize: "+userPageSize);
+			userBlockSize = Integer.parseInt(request.getParameter("userBlockSize"));
+			System.out.println("userBlockSize: "+userBlockSize);
 		}catch(Exception e){ 
-			;
+			System.out.println("userPage 받기 실패");
 		}
 		
 		UserDAO userDAO = UserDAO.getInstance();
 		UserPageList listAll = null;
 		int count = 0;
 		try {
-			listAll = userDAO.listAll(currentPage, pageSize, blockSize);
+			listAll = userDAO.listAll(userCurrentPage, userPageSize, userBlockSize);
 			count = userDAO.getCount();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

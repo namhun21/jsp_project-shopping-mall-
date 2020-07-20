@@ -38,7 +38,7 @@
                     <ul>
                         <li><a href="productmanage">상품관리</a></li>
                         <li><a href="productregist">상품등록</a></li>
-                        <li><a href="#">사용자관리</a></li>
+                        <li><a href="usermanage">사용자관리</a></li>
                         <li><a href="#">주문관리</a></li>
                     </ul>
                 </nav>

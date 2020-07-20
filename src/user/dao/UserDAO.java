@@ -21,11 +21,13 @@ public class UserDAO {
 		return userDAO;
 	}
 	public UserPageList listAll(int currentPageNumber, int pageSize, int blockSize) throws Exception{
+		
 		UserPageList pageList = null;
 		List<UserVO> list = null;
 		UserDAO userDAO = UserDAO.getInstance();
-		int totalCount = userDAO.getCount();
+		int totalCount = userDAO.getTotalCount();
 		if(totalCount<=0) {
+			System.out.println("total count = 0");
 			return null;
 		}
 		System.out.println("totalCount: "+totalCount);
@@ -46,6 +48,7 @@ public class UserDAO {
 	}
 	// 상품 목록 전체 리스트
 		public List<UserVO> listAll(int startNo, int endNo) throws SQLException {
+			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -54,7 +57,7 @@ public class UserDAO {
 			System.out.println("listAll_ endNO:"+endNo);
 			
 			List<UserVO> list = null;
-			String sql = "select * from users where usersequence between ? and ? and isadmin = 0 and isdelete = 0 order by pid desc";
+			String sql = "select * from users where rownum<=3 and usersequence between ? and ? and isdelete = 0";
 			try {
 				conn = DBconn.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -63,7 +66,7 @@ public class UserDAO {
 				rs = pstmt.executeQuery();
 				list = new ArrayList<>();
 				while (rs.next()) {
-					
+					System.out.println("user 정보 담는중");
 					UserVO UserVO = new UserVO();
 					UserVO.setUserId(rs.getString("userid"));
 					UserVO.setUserPw(rs.getString("userpw"));
@@ -84,18 +87,46 @@ public class UserDAO {
 			return list;
 		}
 		
+		public int getTotalCount()throws SQLException {
+			int cnt = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select count(*) from users";
+			try {
+				conn = DBconn.getInstance().getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					cnt = rs.getInt(1);
+					
+				}
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DBconn.close(conn, pstmt, rs);
+			}
+			
+			return cnt;
+		}
+		
 		public int getCount() throws SQLException {
 			int cnt = 0;
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
+			String sql = "select count(*) from users where isdelete = 0";
 			try {
 				conn = DBconn.getInstance().getConnection();
-				pstmt = conn.prepareStatement("select count(*) from users where isadmin = 0 and isdelete = 0");
+				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
-				rs.next();
-				cnt = rs.getInt(1);
+				if(rs.next()) {
+					cnt = rs.getInt(1);
+					
+				}
+				
 				
 			}catch(Exception e) {
 				e.printStackTrace();

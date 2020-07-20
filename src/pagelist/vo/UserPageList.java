@@ -46,7 +46,7 @@ public class UserPageList {
 	}
 	public void calcPaging() {	
 		// [1] 페이지 게시글/출력 페이지개수 유효성 검사 이후 잘못될 경우 설정
-		if(pageSize<1) pageSize=5;	// 1페이지에서  출력되는 게시글 개수
+		if(pageSize<1) pageSize=3;	// 1페이지에서  출력되는 게시글 개수
 		if(blockSize<1)  blockSize=10;	// 게시판 하단에 출력할 페이지 개수 (1~10)
 		if(currentPage <1 || currentPage>totalPage) currentPage=1;
 		
@@ -54,9 +54,9 @@ public class UserPageList {
 		
 		// [2] 각 페이시의 게시글 시작과 끝번호 정해주기
 		startNo = (currentPage -1)*pageSize +1; // 시작은 1 부터 시작해서 10개씩
-		System.out.println(startNo);
+		
 		endNo = startNo + pageSize -1 ;
-		System.out.println(endNo);
+		
 		// [3] 마지막 게시판번호~~
 		if(endNo > totalBoardCount) endNo = totalBoardCount; // 마지막 게시판번호가 총개수보다  크면..
 		
@@ -64,7 +64,9 @@ public class UserPageList {
 		startPage = ( (currentPage-1)/blockSize)*blockSize +1;
 		endPage = startPage + blockSize -1;
 		System.out.println("[2] 페이지 게시글/출력 페이지개수 세팅 완료"+startPage+endPage);
-
+		System.out.println(startNo);
+		System.out.println(endNo);
+		
 		// [5] 총 페이지 개수가 끝번호 페이지보다 작다면 끝번호를 총페이지 수로 맞춰준다.
 		if(endPage > totalPage) endPage=totalPage;
 		

@@ -71,7 +71,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>상품 리스트</h3>
+                    <h3>사용자 리스트</h3>
                     (총 레코드 수 : <%= count %>)
                 </div>
                 <table class="table">
@@ -94,19 +94,22 @@
                                     <td><b>${listAll.userAddress }</b></td>
                                     <td>${listAll.userPhNumber }</td>
                                     <td>${listAll.userEmail }</td>
-                                    <td>${listAll.isAdmin }</td> 
+                                    <td>
+                                    <c:if test="${listAll.isAdmin eq 0 }">N</c:if>
+                                    <c:if test="${listAll.isAdmin eq 1 }">Y</c:if>
+                                    </td> 
                                     <td><button type="button" class="delete_${listAll.userId}_btn"
-											data-pid="${listAll.pid}">삭제</button></td>                                   
+											data-userId="${listAll.userId}">삭제</button></td>                                   
                                 </tr>    
                                 <script type = "text/javascript">
 											$(".delete_${listAll.userId}_btn").click(function() {
 																var confirm_val = confirm("정말 삭제하시겠습니까?");
 																if (confirm_val) {
 												
-																	var pid = $(this).attr("data-userId");
-																	console.log(pid);
+																	var userId = $(this).attr("data-userId");
+																	console.log(userId);
 																	$.ajax({
-																				url : "deleteproduct",
+																				url : "deleteuser",
 																				type : "post",
 																				dataType : "json",
 																				async : false,
@@ -115,7 +118,7 @@
 																				},
 																				success : function(result) {
 																					if (result == 1) {
-																						location.href = "productmanage";
+																						location.href = "usermanage";
 																					} else {
 																						alert("삭제 실패");
 																					}
@@ -144,9 +147,9 @@
 						<c:if test="${page.startPage > 1}">
 							<!-- 시작페이지가 1이상 즉 11 21 31 .... -->
 							<c:url var="url" value="usermanage">
-								<c:param name="currentPage" value="${page.startPage-1}" />
-								<c:param name="pageSize" value="${page.pageSize }" />
-								<c:param name="blockSize" value="${page.blockSize }" />
+								<c:param name="userCurrentPage" value="${page.startPage-1}" />
+								<c:param name="userPageSize" value="${page.pageSize }" />
+								<c:param name="userBlockSize" value="${page.blockSize }" />
 							</c:url>
 							<li class="page-item"><a class="page-link" href="${url }">이전</a>
 						</c:if>
@@ -162,9 +165,9 @@
 							<li class="page-item"><c:if test="${i ne page.currentPage }">
 
 									<c:url var="url" value="usermanage">
-										<c:param name="currentPage" value="${i}" />
-										<c:param name="pageSize" value="${page.pageSize }" />
-										<c:param name="blockSize" value="${page.blockSize }" />
+										<c:param name="userCurrentPage" value="${i}" />
+										<c:param name="userPageSize" value="${page.pageSize }" />
+										<c:param name="userBlockSize" value="${page.blockSize }" />
 									</c:url>
 									<a class="page-link" href="${url }">${i }</a>
 
@@ -174,9 +177,9 @@
 
 						<c:if test="${page.endPage < page.totalPage }">
 							<li class="page-item"><c:url var="url" value="usermanage">
-									<c:param name="currentPage" value="${page.endPage+1}" />
-									<c:param name="pageSize" value="${page.pageSize }" />
-									<c:param name="blockSize" value="${page.blockSize }" />
+									<c:param name="userCurrentPage" value="${page.endPage+1}" />
+									<c:param name="userPageSize" value="${page.pageSize }" />
+									<c:param name="userBlockSize" value="${page.blockSize }" />
 								</c:url> <a class="page-link" href="${url }">다음</a></li>
 						</c:if>
 					</c:if>

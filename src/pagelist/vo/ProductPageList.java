@@ -45,7 +45,7 @@ public class ProductPageList {
 	}
 	public void calcPaging() {	
 		// [1] 페이지 게시글/출력 페이지개수 유효성 검사 이후 잘못될 경우 설정
-		if(pageSize<1) pageSize=5;	// 1페이지에서  출력되는 게시글 개수
+		if(pageSize<1) pageSize=3;	// 1페이지에서  출력되는 게시글 개수
 		if(blockSize<1)  blockSize=10;	// 게시판 하단에 출력할 페이지 개수 (1~10)
 		if(currentPage <1 || currentPage>totalPage) currentPage=1;
 		

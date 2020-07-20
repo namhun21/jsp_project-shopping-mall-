@@ -132,7 +132,7 @@ public class ProductDAO {
 		ProductPageList pageList = null;
 		List<ProductVO> list = null;
 		ProductDAO productDAO = ProductDAO.getInstance();
-		int totalCount = productDAO.getCount();
+		int totalCount = productDAO.getTotalCount();
 		if(totalCount<=0) {
 			return null;
 		}
@@ -194,6 +194,27 @@ public class ProductDAO {
 			}
 			return list;
 		}
+	public int getTotalCount()throws SQLException {
+		int cnt = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBconn.getInstance().getConnection();
+			pstmt = conn.prepareStatement("select count(*) from product");
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt(1);
+			System.out.println(cnt);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBconn.close(conn, pstmt, rs);
+		}
+		
+		return cnt;
+	}
 	
 	public int getCount() throws SQLException {
 		int cnt = 0;
@@ -207,7 +228,7 @@ public class ProductDAO {
 			rs = pstmt.executeQuery();
 			rs.next();
 			cnt = rs.getInt(1);
-			
+			System.out.println(cnt);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
