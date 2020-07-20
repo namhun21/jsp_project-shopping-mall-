@@ -54,7 +54,7 @@ public class UserDAO {
 			System.out.println("listAll_ endNO:"+endNo);
 			
 			List<UserVO> list = null;
-			String sql = "select * from users where pid between ? and ? and isdelete = 0 order by pid desc";
+			String sql = "select * from users where usersequence between ? and ? and isadmin = 0 and isdelete = 0 order by pid desc";
 			try {
 				conn = DBconn.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -92,7 +92,7 @@ public class UserDAO {
 			
 			try {
 				conn = DBconn.getInstance().getConnection();
-				pstmt = conn.prepareStatement("select count(*) from users where isadmin = 0");
+				pstmt = conn.prepareStatement("select count(*) from users where isadmin = 0 and isdelete = 0");
 				rs = pstmt.executeQuery();
 				rs.next();
 				cnt = rs.getInt(1);
@@ -104,5 +104,25 @@ public class UserDAO {
 			}
 			
 			return cnt;
+		}
+		
+		public int deleteUsers(String userId) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int result = 0;
+			conn = DBconn.getInstance().getConnection();
+			String sql = "update users set isdelete = 1 where userId = ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				result = pstmt.executeUpdate();
+				System.out.println("Delete 완료");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				DBconn.close(conn, pstmt, rs);
+			}
+			return result;
 		}
 }

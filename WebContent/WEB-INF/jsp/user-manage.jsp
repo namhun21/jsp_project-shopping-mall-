@@ -80,7 +80,7 @@
                                     <th scope="col">아이디</th>
                                     <th scope="col">이름</th>
                                     <th scope="col">주소</th>
-                                    <th scope="col">햔드폰번호</th>
+                                    <th scope="col">핸드폰번호</th>
                                     <th scope="col">이메일</th>
                                     <th scope="col">관리자 여부</th>
                                     <th scope="col">삭제</th>
@@ -89,21 +89,21 @@
                             <tbody>
                             	<c:forEach var="listAll" items="${page.list}">
                             	<tr>
-                                    <th scope="row"><b>${listAll.pname }</b></th>
-                                    <td><b>${listAll.price }</b></td>
-                                    <td><b>${listAll.price }</b></td>
-                                    <td>${listAll.pcontent }</td>
-                                    <td>${listAll.product_hit }</td>
-                                    <td>${listAll.product_reply_cnt }</td> 
-                                    <td><button type="button" class="delete_${listAll.pid}_btn"
+                                    <th scope="row"><b>${listAll.userId }</b></th>
+                                    <td><b>${listAll.userName }</b></td>
+                                    <td><b>${listAll.userAddress }</b></td>
+                                    <td>${listAll.userPhNumber }</td>
+                                    <td>${listAll.userEmail }</td>
+                                    <td>${listAll.isAdmin }</td> 
+                                    <td><button type="button" class="delete_${listAll.userId}_btn"
 											data-pid="${listAll.pid}">삭제</button></td>                                   
                                 </tr>    
                                 <script type = "text/javascript">
-											$(".delete_${listAll.pid}_btn").click(function() {
+											$(".delete_${listAll.userId}_btn").click(function() {
 																var confirm_val = confirm("정말 삭제하시겠습니까?");
 																if (confirm_val) {
 												
-																	var pid = $(this).attr("data-pid");
+																	var pid = $(this).attr("data-userId");
 																	console.log(pid);
 																	$.ajax({
 																				url : "deleteproduct",
@@ -111,7 +111,7 @@
 																				dataType : "json",
 																				async : false,
 																				data : {
-																					pid : pid
+																					userId : userId
 																				},
 																				success : function(result) {
 																					if (result == 1) {
@@ -143,7 +143,7 @@
 
 						<c:if test="${page.startPage > 1}">
 							<!-- 시작페이지가 1이상 즉 11 21 31 .... -->
-							<c:url var="url" value="productmanage">
+							<c:url var="url" value="usermanage">
 								<c:param name="currentPage" value="${page.startPage-1}" />
 								<c:param name="pageSize" value="${page.pageSize }" />
 								<c:param name="blockSize" value="${page.blockSize }" />
@@ -161,7 +161,7 @@
 							<%-- 그 외 페이지는 다시 리턴 하면서 호출 --%>
 							<li class="page-item"><c:if test="${i ne page.currentPage }">
 
-									<c:url var="url" value="productmanage">
+									<c:url var="url" value="usermanage">
 										<c:param name="currentPage" value="${i}" />
 										<c:param name="pageSize" value="${page.pageSize }" />
 										<c:param name="blockSize" value="${page.blockSize }" />
@@ -173,7 +173,7 @@
 						<%-- 마지막 페이지 번호가 전체페이지 수보다 적다면 다음 페이지가 존재한다. --%>
 
 						<c:if test="${page.endPage < page.totalPage }">
-							<li class="page-item"><c:url var="url" value="productmanage">
+							<li class="page-item"><c:url var="url" value="usermanage">
 									<c:param name="currentPage" value="${page.endPage+1}" />
 									<c:param name="pageSize" value="${page.pageSize }" />
 									<c:param name="blockSize" value="${page.blockSize }" />

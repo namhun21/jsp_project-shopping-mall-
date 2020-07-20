@@ -8,6 +8,7 @@ public class UserVO {
 	private String userEmail;
 	private String userPhNumber;
 	private int isAdmin;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -50,5 +51,6 @@ public class UserVO {
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
 	
 }
