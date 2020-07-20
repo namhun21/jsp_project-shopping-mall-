@@ -160,7 +160,9 @@ var preview = document.querySelector('#preview');
 
 upload.addEventListener('change',function (e) {
     var get_file = e.target.files;
-
+	
+    //var fileName = $("#upload").val();
+    //alert(fileName);
     var image = document.createElement('img');
 
     /* FileReader 객체 생성 */

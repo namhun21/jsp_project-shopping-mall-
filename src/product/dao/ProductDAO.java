@@ -132,7 +132,7 @@ public class ProductDAO {
 		ProductPageList pageList = null;
 		List<ProductVO> list = null;
 		ProductDAO productDAO = ProductDAO.getInstance();
-		int totalCount = productDAO.getTotalCount();
+		int totalCount = productDAO.getCount();
 		if(totalCount<=0) {
 			return null;
 		}
@@ -162,7 +162,8 @@ public class ProductDAO {
 			System.out.println("listAll_ endNO:"+endNo);
 			
 			List<ProductVO> list = null;
-			String sql = "select * from product where pid between ? and ? and isdelete = 0 order by pid desc";
+			//String sql = "select * from product where pid between ? and ? and isdelete = 0 order by pid desc";
+			String sql = "select * from (select rownum as rnum, A.* from (select * from product where isdelete = 0)A  )B where B.rnum between ? and ?";
 			try {
 				conn = DBconn.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);

@@ -96,7 +96,7 @@
                                     <td><b>
                                     <c:if test="${listAll.categorycode eq 1 }">상의</c:if>
                                     <c:if test="${listAll.categorycode eq 2 }">하의</c:if>
-                                    <c:if test="${listAll.categorycode eq 3 }">신빌</c:if>
+                                    <c:if test="${listAll.categorycode eq 3 }">신발</c:if>
                                     </b></td>
                                     <td><b>${listAll.price }</b></td>
                                     <td>${listAll.pcontent }</td>

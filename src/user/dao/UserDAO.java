@@ -25,7 +25,7 @@ public class UserDAO {
 		UserPageList pageList = null;
 		List<UserVO> list = null;
 		UserDAO userDAO = UserDAO.getInstance();
-		int totalCount = userDAO.getTotalCount();
+		int totalCount = userDAO.getCount();
 		if(totalCount<=0) {
 			System.out.println("total count = 0");
 			return null;
@@ -57,7 +57,8 @@ public class UserDAO {
 			System.out.println("listAll_ endNO:"+endNo);
 			
 			List<UserVO> list = null;
-			String sql = "select * from users where rownum<=3 and usersequence between ? and ? and isdelete = 0";
+			//String sql = "select * from users where rownum<=3 and usersequence between ? and ? and isdelete = 0";
+			String sql = "select * from (select rownum as rnum, A.* from (select * from users where isdelete = 0)A  )B where B.rnum between ? and ?";
 			try {
 				conn = DBconn.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
