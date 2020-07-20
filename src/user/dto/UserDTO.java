@@ -1,6 +1,6 @@
-package user.vo;
+package user.dto;
 
-public class UserVO {
+public class UserDTO {
 	private String userId;
 	private String userPw;
 	private String userName;

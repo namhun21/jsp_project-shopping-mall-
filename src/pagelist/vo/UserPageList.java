@@ -1,12 +1,13 @@
 package pagelist.vo;
 
 import java.util.List;
-import user.vo.UserVO;
+
+import user.dto.UserDTO;
 
 
 
 public class UserPageList {
-	private List<UserVO> list;
+	private List<UserDTO> list;
 	private int currentPage; 	// 현재페이지
 	private int pageSize;		// 1페이지당 갯수 정해짐
 	
@@ -72,10 +73,10 @@ public class UserPageList {
 		
 		System.out.println("endPage:"+endPage);
 	}
-	public void setList(List<UserVO> list) {
+	public void setList(List<UserDTO> list) {
 		this.list = list;
 	}
-	public List<UserVO> getList() {
+	public List<UserDTO> getList() {
 		return list;
 	}
 	public int getCurrentPage() {

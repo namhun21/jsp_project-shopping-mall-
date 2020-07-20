@@ -30,11 +30,11 @@ public class ProductRegistProcessController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 	
 		ProductDAO productdao = ProductDAO.getInstance();
-		int pId =  productdao.selectGetProductId() + 1;
+		String pId =  String.valueOf(productdao.selectGetProductId() + 1);
 		System.out.println("이것은 pid"+pId);
 		String pName = request.getParameter("pName");
 		String pContent = request.getParameter("pContent");
-		int categoryCode = Integer.parseInt(request.getParameter("categoryCode"));
+		String categoryCode = request.getParameter("categoryCode");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int stock = Integer.parseInt(request.getParameter("stock"));
 		

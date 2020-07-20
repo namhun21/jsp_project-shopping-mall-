@@ -1,20 +1,20 @@
-package product.vo;
+package product.dto;
 
-public class ProductVO {
-	private int pid;
+public class ProductDTO {
+	private String pid;
 	private String pname;
 	private String pcontent;
-	private int categorycode;
+	private String categorycode;
 	private int price;
 	private int stock;
 	private String product_img;
 	private String product_regist;
 	private int product_hit;
 	private int product_reply_cnt;
-	public int getPid() {
+	public String getPid() {
 		return pid;
 	}
-	public void setPid(int pid) {
+	public void setPid(String pid) {
 		this.pid = pid;
 	}
 	public String getPname() {
@@ -29,10 +29,10 @@ public class ProductVO {
 	public void setPcontent(String pcontent) {
 		this.pcontent = pcontent;
 	}
-	public int getCategorycode() {
+	public String getCategorycode() {
 		return categorycode;
 	}
-	public void setCategorycode(int categorycode) {
+	public void setCategorycode(String categorycode) {
 		this.categorycode = categorycode;
 	}
 	public int getPrice() {

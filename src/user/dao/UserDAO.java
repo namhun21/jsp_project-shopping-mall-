@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pagelist.vo.UserPageList;
-import user.vo.UserVO;
-import util.DBconn;
+import user.dto.UserDTO;
+import util.DBconnection;
 
 public class UserDAO {
 	public static UserDAO userDAO;
@@ -23,7 +23,7 @@ public class UserDAO {
 	public UserPageList listAll(int currentPageNumber, int pageSize, int blockSize) throws Exception{
 		
 		UserPageList pageList = null;
-		List<UserVO> list = null;
+		List<UserDTO> list = null;
 		UserDAO userDAO = UserDAO.getInstance();
 		int totalCount = userDAO.getCount();
 		if(totalCount<=0) {
@@ -47,7 +47,7 @@ public class UserDAO {
 		return pageList;
 	}
 	// 상품 목록 전체 리스트
-		public List<UserVO> listAll(int startNo, int endNo) throws SQLException {
+		public List<UserDTO> listAll(int startNo, int endNo) throws SQLException {
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -56,11 +56,11 @@ public class UserDAO {
 			System.out.println("listAll_ startNO:"+startNo);
 			System.out.println("listAll_ endNO:"+endNo);
 			
-			List<UserVO> list = null;
+			List<UserDTO> list = null;
 			//String sql = "select * from users where rownum<=3 and usersequence between ? and ? and isdelete = 0";
 			String sql = "select * from (select rownum as rnum, A.* from (select * from users where isdelete = 0)A  )B where B.rnum between ? and ?";
 			try {
-				conn = DBconn.getInstance().getConnection();
+				conn = DBconnection.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, startNo);
 				pstmt.setInt(2, endNo);
@@ -68,7 +68,7 @@ public class UserDAO {
 				list = new ArrayList<>();
 				while (rs.next()) {
 					System.out.println("user 정보 담는중");
-					UserVO UserVO = new UserVO();
+					UserDTO UserVO = new UserDTO();
 					UserVO.setUserId(rs.getString("userid"));
 					UserVO.setUserPw(rs.getString("userpw"));
 					UserVO.setUserName(rs.getString("username"));
@@ -83,7 +83,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 			finally {
-				DBconn.close(conn, pstmt, rs);
+				DBconnection.close(conn, pstmt, rs);
 			}
 			return list;
 		}
@@ -95,7 +95,7 @@ public class UserDAO {
 			ResultSet rs = null;
 			String sql = "select count(*) from users";
 			try {
-				conn = DBconn.getInstance().getConnection();
+				conn = DBconnection.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
@@ -107,7 +107,7 @@ public class UserDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				DBconn.close(conn, pstmt, rs);
+				DBconnection.close(conn, pstmt, rs);
 			}
 			
 			return cnt;
@@ -120,7 +120,7 @@ public class UserDAO {
 			ResultSet rs = null;
 			String sql = "select count(*) from users where isdelete = 0";
 			try {
-				conn = DBconn.getInstance().getConnection();
+				conn = DBconnection.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
@@ -132,7 +132,7 @@ public class UserDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				DBconn.close(conn, pstmt, rs);
+				DBconnection.close(conn, pstmt, rs);
 			}
 			
 			return cnt;
@@ -143,7 +143,7 @@ public class UserDAO {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			int result = 0;
-			conn = DBconn.getInstance().getConnection();
+			conn = DBconnection.getInstance().getConnection();
 			String sql = "update users set isdelete = 1 where userId = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -153,7 +153,7 @@ public class UserDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
-				DBconn.close(conn, pstmt, rs);
+				DBconnection.close(conn, pstmt, rs);
 			}
 			return result;
 		}

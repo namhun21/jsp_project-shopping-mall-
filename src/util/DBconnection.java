@@ -11,13 +11,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class DBconn {
-	private static DBconn dbconn = null;
-	private DBconn() {}
+public class DBconnection {
+	private static DBconnection dbconn = null;
+	private DBconnection() {}
 	
-	public static DBconn getInstance() {
+	public static DBconnection getInstance() {
 		if(dbconn == null) {
-			dbconn = new DBconn();
+			dbconn = new DBconnection();
 		}
 		return dbconn;
 	}

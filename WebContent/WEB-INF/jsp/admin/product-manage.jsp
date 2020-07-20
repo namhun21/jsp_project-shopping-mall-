@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="product.dao.ProductDAO"%>
-<%@ page import="product.vo.ProductVO" %>
+<%@ page import="product.dto.ProductDTO" %>
 <%@ page import="pagelist.vo.ProductPageList" %>
 
 <!DOCTYPE html>
@@ -94,9 +94,9 @@
                             	<tr>
                                     <th scope="row"><b>${listAll.pname }</b></th>
                                     <td><b>
-                                    <c:if test="${listAll.categorycode eq 1 }">상의</c:if>
-                                    <c:if test="${listAll.categorycode eq 2 }">하의</c:if>
-                                    <c:if test="${listAll.categorycode eq 3 }">신발</c:if>
+                                    <c:if test="${listAll.categorycode == '1' }">상의</c:if>
+                                    <c:if test="${listAll.categorycode == '2' }">하의</c:if>
+                                    <c:if test="${listAll.categorycode == '3' }">신발</c:if>
                                     </b></td>
                                     <td><b>${listAll.price }</b></td>
                                     <td>${listAll.pcontent }</td>

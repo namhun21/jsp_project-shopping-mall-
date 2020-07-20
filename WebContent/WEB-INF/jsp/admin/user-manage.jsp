@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="user.dao.UserDAO"%>
-<%@ page import="user.vo.UserVO" %>
+<%@ page import="user.dto.UserDTO" %>
 <%@ page import="pagelist.vo.UserPageList" %>
 
 <!DOCTYPE html>
