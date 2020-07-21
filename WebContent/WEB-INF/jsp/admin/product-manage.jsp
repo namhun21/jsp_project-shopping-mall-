@@ -94,9 +94,9 @@
                             	<tr>
                                     <th scope="row"><b>${listAll.pname }</b></th>
                                     <td><b>
-                                    <c:if test="${listAll.categorycode == '1' }">상의</c:if>
-                                    <c:if test="${listAll.categorycode == '2' }">하의</c:if>
-                                    <c:if test="${listAll.categorycode == '3' }">신발</c:if>
+                                    <c:if test="${listAll.categorycode == 'TOP' }">상의</c:if>
+                                    <c:if test="${listAll.categorycode == 'BOTTOM' }">하의</c:if>
+                                    <c:if test="${listAll.categorycode == 'SHOES' }">신발</c:if>
                                     </b></td>
                                     <td><b>${listAll.price }</b></td>
                                     <td>${listAll.pcontent }</td>

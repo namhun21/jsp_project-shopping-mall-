@@ -47,7 +47,6 @@
 			data : {comment:commentValue, pid:<%=product.getPid()%>},
 			dataType : "json",
 			cache : false,
-			async : true,
 			success : function(data){
 				alert('등록되었습니다.');
 				console.log(data[0]);
@@ -60,7 +59,23 @@
 		})
 	}
 	
-	
+	function addToCart(){
+		var productCnt = document.getElementById("productCnt").value;
+		
+		$.ajax({
+			url: "AddToCart",
+			type : "post",
+			data : {productCnt:productCnt, pid:<%=product.getPid()%>},
+			dataType : "json",
+			cache : false,
+			success : function(data){
+				alert('장바구니에 담았습니다.');
+			},
+			error : function(request,status,error){
+				//console.log(data.name);
+			}
+		})
+	}
 	
 	
 </script>
@@ -133,7 +148,8 @@
                                 <input id="productCnt" type="text" value="1">
                             </div>
                         </div>
-                        <a href="#" class="primary-btn pc-btn">Add to cart</a>
+                        <!-- <a href="#" class="primary-btn pc-btn">Add to cart</a> -->
+                        <button type="button" class="btn btn-light" onclick="addToCart()">Add to cart</button>
                         <ul class="p-info">
                             <li>Product Information</li>
                             <li onclick="getcomment()">Reviews</li>

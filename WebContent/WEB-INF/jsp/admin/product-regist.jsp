@@ -94,9 +94,9 @@
                             </div>
                             <div class="col-lg-9">
                                 <select class="cart-select country-usa" name = "categoryCode">
-                                    <option value = "1" >상의</option>
-                                    <option value = "2">하의</option>
-                                    <option value = "3">신발</option>
+                                    <option value = "TOP" >상의</option>
+                                    <option value = "BOTTOM">하의</option>
+                                    <option value = "SHOES">신발</option>
                                 </select>
                             </div>
                         </div>

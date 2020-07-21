@@ -64,7 +64,7 @@ public class MainController extends HttpServlet {
 				request.setAttribute("plist", plist);
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("sortby", sortby);
-				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/category.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/index.jsp");
 				rd.forward(request, response);
 			}
 		}

@@ -14,8 +14,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Product")
 public class ProductController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/product.jsp");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher rd;
+		String a = "All";
+		if (request.getParameter("value").equals("Top")) {
+			System.out.println("1");
+			a = request.getParameter("value");
+			request.setAttribute("a", "Top");
+		} else if (request.getParameter("value").equals("Bottom")) {
+			System.out.println("2");
+			request.setAttribute("a", "Bottom");
+		} else if (request.getParameter("value").equals("Shoes")) {
+			System.out.println("3");
+			request.setAttribute("a", "Shoes");
+		} else {
+			System.out.println("4");
+			request.setAttribute("a", "All");
+		}
+
+		rd = request.getRequestDispatcher("WEB-INF/jsp/client/product.jsp");
 		rd.forward(request, response);
 	}
 

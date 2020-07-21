@@ -34,15 +34,15 @@
     </div>
     
     <!-- Search model -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
+   <div class="search-model">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+         <div class="search-close-switch">+</div>
+         <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+         </form>
+      </div>
+   </div>
+   <!-- Search model end -->
 
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -64,16 +64,20 @@
                     <a href="#" class="in">Sign in</a>
                 </div>
                 <nav class="main-menu mobile-menu">
+                    <!-- class="active" -->
                     <ul>
-                        <li><a class="active" href="main">Home</a></li>
-                        <li><a href="Category">Category</a>
+                        <li><a href="main">Home</a></li>
+                        <li><a>Category</a>
                             <ul class="sub-menu">
-                                <li><a href="Product">Top</a></li>
-                                <li><a href="Product">Bottom</a></li>
-                                <li><a href="Product">Shoes</a></li>
+                               <li><a href="Product?value=All">All</a></li>
+                                <li><a href="Product?value=Top">Top</a></li>
+                                <li><a href="Product?value=Bottom">Bottom</a></li>
+                                <li><a href="Product?value=Shoes">Shoes</a></li>
                             </ul>
                         </li>
+                        <li><a href="Cart">Cart</a></li>
                         <li><a href="Contact">Contact</a></li>
+                        
                     </ul>
                 </nav>
             </div>
@@ -106,6 +110,7 @@
     </div>
     <!-- Header Info End -->
     <!-- Header End -->
+
 </body>
 
 </html>
