@@ -12,26 +12,43 @@
 <head>
 <%ArrayList<CartDTO> clist = (ArrayList<CartDTO>) request.getAttribute("clist");%>
 <script type="text/javascript">
-   function changecount(){
-      var count = document.getElementById("count");
-      var cartid = document.getElementById("cartid");
-      alert(count.value, cartid.value);
-      $.ajax({
-         url: "Cart",
-         type : "post",
-         data : {count:count},
-         dataType : "json",
-         cache : false,
-         success : function(data){
-            console.log(data.count);
-            //$("#data").html("<h1>"+data.name+"</h1>");
-         },
-         error : function(request,status,error){
-            //console.log(data.name);
-         }
-      })
+   function changecount(index,cartid){
+      var count = document.getElementById("count" + index).value;
+      var cartid = cartid;
+      console.log(count,cartid);
+         $.ajax({
+            url: "Cart",
+            type : "post",
+            data : {count:count,cartid:cartid},
+            dataType : "json",
+            cache : false,
+            success : function(data){
+               console.log(data.count);
+               //$("#data").html("<h1>"+data.name+"</h1>");
+            },
+            error : function(request,status,error){
+               //console.log(data.name);
+            }
+         })
    }
-   
+   function deleteproduct(cartid){
+      var cartid = cartid;
+      console.log(cartid);
+         $.ajax({
+            url: "Cart",
+            type : "post",
+            data : {cartid:cartid},
+            dataType : "json",
+            cache : false,
+            success : function(data){
+               console.log(data.count);
+               //$("#data").html("<h1>"+data.name+"</h1>");
+            },
+            error : function(request,status,error){
+               //console.log(data.name);
+            }
+         })
+  }
                
 </script>
 
@@ -73,7 +90,6 @@
                         </tr>
                     </thead>
                     <c:set var = "totalprice" value = "0" />
-                   
                <c:forEach var="index" begin="${0}" end="${fn:length(clist)-1}" step="1">
                <tbody>
                         <tr>
@@ -88,14 +104,14 @@
                             <td class="quantity-col">
                                 <div class="pro-qty">
                                    <span class = "dec qtybtn"></span>
-                                    <input type="text" value ="${clist[index].pCount}" Id = "count">
-                                    <a href = "Cart" onclick="changecount()">수정</a>
+                                    <input type="text" value ="${clist[index].pCount}" Id = "count${index}">
                                     <span class = "inc qtybtn"></span>
+                                    <button class="btn btn-light" type="button" onclick="changecount(${index},${clist[index].cartId})">수정</button>
                                 </div>             
                             </td>
                             <td class="total">${clist[index].pCount*clist[index].price}원</td>
                             <c:set var = "totalprice" value = "${totalprice + clist[index].pCount*clist[index].price}" />
-                            <td class="product-close">x</td>
+                            <td class="product-close"><a href = "Cart" onclick="deleteproduct(${clist[index].cartId})" style="color: black">x</a></td>
                         </tr>
                     </tbody>
                     </c:forEach>

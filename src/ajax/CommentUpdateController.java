@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -22,9 +23,12 @@ public class CommentUpdateController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String commentValue = request.getParameter("comment");
 		String pid = request.getParameter("pid");
+		
+		HttpSession session = request.getSession();
+	    String uid = (String)session.getAttribute("userid");
 
 		ProductDAO dao = ProductDAO.getInstance();
-		int result = dao.insertComment(commentValue, pid);
+		int result = dao.insertComment(uid,commentValue, pid);
 
 		// result 0이상이면 된거다다다다다다
 		if (result > 0) {

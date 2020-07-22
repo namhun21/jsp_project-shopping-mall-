@@ -29,10 +29,13 @@
                         <img src="img/icons/bag.png" alt="">
                         <span>2</span>
                     </a>
+                    <br>
+                    <a href="logout" class="in">logout</a>
                 </div>
                 <div class="user-access">
-                    <a href="#">Register</a>
-                    <a href="#" class="in">Sign in</a>
+                <br>
+                    <h5>${userid}관리자님 환영합니다.</h5>
+                    
                 </div>
                 <nav class="main-menu mobile-menu">
                     <ul>
@@ -52,19 +55,19 @@
                 <div class="col-md-4">
                     <div class="header-item">
                         <img src="img/icons/delivery.png" alt="">
-                        <p>Free shipping on orders over $30 in USA</p>
+                        <p>Free shipping on orders over $50 </p>
                     </div>
                 </div>
                 <div class="col-md-4 text-left text-lg-center">
                     <div class="header-item">
                         <img src="img/icons/voucher.png" alt="">
-                        <p>20% Student Discount</p>
+                        <p>Solution 10% Discount</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-left text-xl-right">
                     <div class="header-item">
                     <img src="img/icons/sales.png" alt="">
-                    <p>30% off on dresses. Use code: 30OFF</p>
+                    <p>Contact us : 010-3920-1236</p>
                 </div>
                 </div>
             </div>

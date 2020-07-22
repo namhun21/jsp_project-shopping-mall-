@@ -1,7 +1,7 @@
 package cart.dto;
 
 public class CartDTO {
-	private int pid;
+	private String pid;
 	private String uid;
 	private int pcount;
 	private int cartid;
@@ -17,10 +17,10 @@ public class CartDTO {
 	}
 	
 	
-	public int getpId() {
+	public String getpId() {
 		return pid;
 	}
-	public void setpId(int pid) {
+	public void setpId(String pid) {
 		this.pid = pid;
 	}
 	public String getuId() {

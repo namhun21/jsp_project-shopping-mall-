@@ -121,7 +121,7 @@ public class ProductDAO {
 	}
 
 	// product 삭제시 메소드
-	public int deleteProduct(int pId) {
+	public int deleteProduct(String pId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -130,7 +130,7 @@ public class ProductDAO {
 		String sql = "update product set isdelete = 1 where pid = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pId);
+			pstmt.setString(1, pId);
 			result = pstmt.executeUpdate();
 			System.out.println("Delete 완료");
 		} catch (Exception e) {
@@ -348,13 +348,12 @@ public class ProductDAO {
 	}
 
 	// comment 삽입
-	public int insertComment(String commentValue, String pid) {
+	public int insertComment(String uid, String commentValue, String pid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		// TODO userid : receive data from session or cookie
-		String userid = "juseok";
+		String userid = uid;
 		ArrayList<ProductCommentDTO> clist = selectCommentAll();
 		String replyID = String.valueOf(clist.size() + 1);
 

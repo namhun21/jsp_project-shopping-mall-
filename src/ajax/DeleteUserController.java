@@ -1,4 +1,4 @@
-package controller;
+package ajax;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import product.dao.ProductDAO;
+import user.dao.UserDAO;
+
+
 
 /**
- * Servlet implementation class DeleteProductController
+ * Servlet implementation class DeleteUserController
  */
-@WebServlet("/deleteproduct")
-public class DeleteProductController extends HttpServlet {
+@WebServlet("/deleteuser")
+public class DeleteUserController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductDAO productDAO = ProductDAO.getInstance();
+		UserDAO userDAO = UserDAO.getInstance();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		int pId = Integer.parseInt(request.getParameter("pid"));
+		String userId = request.getParameter("userId");
 		try {
-			productDAO.deleteProduct(pId);
+			userDAO.deleteUsers(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

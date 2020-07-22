@@ -46,13 +46,12 @@ public class CartDAO {
 		return result;
 	}
 
-	public int cartInsert(String cartid, String pid, int pcount) {
+	public int cartInsert(String uid,String cartid, String pid, int pcount) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		// TODO userid 세션으로 받아오기
-		String userid = "js";
+		String userid = uid;
 
 		conn = DBconnection.getInstance().getConnection();
 		String sql = "insert into cart VALUES (?,?,?,?,0)";
@@ -86,7 +85,7 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CartDTO cvo = new CartDTO();
-				cvo.setpId(rs.getInt("pid"));
+				cvo.setpId(rs.getString("pid"));
 				cvo.setuId(rs.getString("userid"));
 				cvo.setcartId(rs.getInt("cartid"));
 				cvo.setPrice(rs.getString("price"));

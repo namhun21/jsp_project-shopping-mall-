@@ -29,10 +29,10 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    <!--  <div id="preloder">
         <div class="loader"></div>
     </div>
-    
+    -->
     <!-- Search model -->
    <div class="search-model">
       <div class="h-100 d-flex align-items-center justify-content-center">
@@ -43,7 +43,7 @@
       </div>
    </div>
    <!-- Search model end -->
-
+	
     <!-- Header Section Begin -->
     <header class="header-section">
         <div class="container-fluid">
@@ -51,7 +51,9 @@
                 <div class="logo">
                     <a href="main"><img src="img/logo.png" alt=""></a>
                 </div>
-                <div class="header-right">
+                <c:choose>
+                	<c:when test = "${empty userid }">
+                		<div class="header-right">
                     <img src="img/icons/search.png" alt="" class="search-trigger">
                     <img src="img/icons/man.png" alt="">
                     <a href="#">
@@ -60,9 +62,28 @@
                     </a>
                 </div>
                 <div class="user-access">
-                    <a href="#">Register</a>
-                    <a href="#" class="in">Sign in</a>
+                    <a href="join">Register</a>
+                    <a href="login" class="in">Sign in</a>
                 </div>
+                	</c:when>
+                	<c:otherwise>
+                		<div class="header-right">
+                    <img src="img/icons/search.png" alt="" class="search-trigger">
+                    <img src="img/icons/man.png" alt="">
+                    <a href="#">
+                        <img src="img/icons/bag.png" alt="">
+                        <span>2</span>
+                    </a>
+                    <br>
+                    <a href="logout" class="in">logout</a>
+                </div>
+                <div class="user-access">
+                    <h5>${userid}님 환영합니다.</h5>
+                    
+                </div>
+                	</c:otherwise>
+                </c:choose>
+                
                 <nav class="main-menu mobile-menu">
                     <!-- class="active" -->
                     <ul>
@@ -90,19 +111,19 @@
                 <div class="col-md-4">
                     <div class="header-item">
                         <img src="img/icons/delivery.png" alt="">
-                        <p>Free shipping on orders over $30 in USA</p>
+                        <p>Free shipping on orders over $50</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-left text-lg-center">
                     <div class="header-item">
                         <img src="img/icons/voucher.png" alt="">
-                        <p>20% Student Discount</p>
+                        <p>10% Student Discount</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-left text-xl-right">
                     <div class="header-item">
                     <img src="img/icons/sales.png" alt="">
-                    <p>30% off on dresses. Use code: 30OFF</p>
+                    <p>Season Off 30% discount </p>
                 </div>
                 </div>
             </div>

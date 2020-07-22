@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -24,8 +25,10 @@ public class AddToCartController extends HttpServlet {
 		String pid = request.getParameter("pid");
 		CartDAO dao = CartDAO.getInstance();
 		int cartCount = dao.getCartCount();
+		HttpSession session = request.getSession();
+	    String uid = (String)session.getAttribute("userid");
 
-		int result = dao.cartInsert(String.valueOf(cartCount + 1), pid, Integer.parseInt(productCnt));
+		int result = dao.cartInsert(uid,String.valueOf(cartCount + 1), pid, Integer.parseInt(productCnt));
 		Gson gson = new Gson();
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);

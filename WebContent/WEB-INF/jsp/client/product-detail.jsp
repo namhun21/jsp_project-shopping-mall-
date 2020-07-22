@@ -13,6 +13,7 @@
 
 <%ProductDTO product = (ProductDTO) request.getAttribute("product"); %>
 <% ArrayList<ProductCommentDTO> clist = (ArrayList<ProductCommentDTO>) request.getAttribute("comment"); %>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	var commentClicked = false;
@@ -28,9 +29,9 @@
 		}
 	}
 	
-	function enrollClicked() {
+	function enrollClicked(userid) {
 		
-		var commentValue = $("#commentValue").val();
+		var commentValue = document.getElementById("commentValue");
 		
 		let today = new Date();
 		var year = today.getFullYear(); // 년도
@@ -39,19 +40,23 @@
 		var hours = today.getHours(); // 시
 		var minutes = today.getMinutes();  // 분
 		var seconds = today.getSeconds();  // 초
-		
-		console.log(commentValue);
+		var userid = userid;
+		console.log(userid);
+		console.log(commentValue.value);
 		$.ajax({
 			url: "CommentUpdate",
 			type : "post",
-			data : {comment:commentValue, pid:<%=product.getPid()%>},
+			data : {comment:commentValue.value, pid:<%=product.getPid()%>},
 			dataType : "json",
 			cache : false,
 			success : function(data){
 				alert('등록되었습니다.');
 				console.log(data[0]);
 				$('#commentSpace').prepend("<input type='text' disabled value="+data.comments+">");
-				$('#commentSpace').prepend(year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds+"&nbsp;&nbsp;&nbsp; WIRTER : ");
+				$('#commentSpace').prepend(year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds+"&nbsp;&nbsp;&nbsp; WRITER : "+userid);
+				
+				commentValue.placeholder ="Write your comment";
+				commentValue.value = "";
 			},
 			error : function(request,status,error){
 				//console.log(data.name);
@@ -175,7 +180,7 @@
 		                            <input type="text" placeholder="Write your comment" id="commentValue">
 		                        </div>
 		                        <div class="col-lg-12 text-right">
-		                            <button type="button" onclick="enrollClicked()">Enroll comment</button>
+		                            <button type="button" onclick="enrollClicked('${userid}')">Enroll comment</button>
 		                        </div><br><br><br>
 		                        <div id="commentSpace">
 			                       <c:set var='checkProduct' value='false'></c:set>
@@ -192,6 +197,7 @@
 											<!-- <div class="col-lg-6"> -->
 												${list.repregist } &nbsp;&nbsp;&nbsp; WRITER : ${list.userid } 
 					                            <input type="text" value="${list.comments } " disabled>
+					                            
 					                        <!-- </div><br> -->
 										</c:if>
 									</c:forEach>

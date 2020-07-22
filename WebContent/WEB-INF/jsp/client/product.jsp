@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<!-- Latest Product Begin sql로 top,bottom,shoes로 불러오기-->
+   <!-- Latest Product Begin sql로 top,bottom,shoes로 불러오기-->
     <section class="latest-products spad">
         <div class="container">
             <div class="product-filter">
@@ -22,11 +22,11 @@
                             <h2>Products</h2>
                         </div>
                         <% 
-	                        ProductDAO pdao = ProductDAO.getInstance();
-		            		ArrayList<ProductDTO> list; 
-		            		ProductDTO data = new ProductDTO();
-		            		String category="";
-            			%>
+                           ProductDAO pdao = ProductDAO.getInstance();
+                        ArrayList<ProductDTO> list; 
+                        ProductDTO data = new ProductDTO();
+                        String category="";
+                     %>
                         <ul class="product-controls">
                             <li><a href="Product?value=All" style="color: gray">All</a></li>
                             <li><a href="Product?value=Top" style="color: gray">Top</a></li>
@@ -37,84 +37,100 @@
                 </div>
             </div>
             <div class="row" id="product-list">
-				<% category = (String)request.getAttribute("a");
-				if(category.equals("Top"))
-				{
-					list = pdao.productSelect(category);
-					for(int i=0; i < list.size(); i++){
-					data = list.get(i);%>
-	                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-	                    <div class="single-product-item">
-	                        <figure>
-	                            <a href="#"><img src = "<%= data.getProduct_img()%>" alt=""></a>
-	                            <div class="p-status">new</div>
-	                        </figure>
-                        	<div class="product-text">
-                            	<h6><%=data.getPname() %></h6>
-                            	<p><%=data.getPrice() %>원</p>
-                        	</div>
-                    	</div>
-	                </div>
+            <% category = (String)request.getAttribute("a");
+            if(category.equals("Top"))
+            {
+               list = pdao.productSelect(category);
+               for(int i=0; i < list.size(); i++){
+               data = list.get(i);%>
+                   <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                       <div class="single-product-item">
+                           <figure>
+                               <div class="p-status">new</div>
+                               <div class="hover-icon">
+                                <a href="<%= data.getProduct_img()%>" class="pop-up"><img src = "<%= data.getProduct_img()%>" alt=""></a>
+                               </div>            
+                           </figure>
+                           <div class="product-text">
+                              <a href="ProductDetail?pid=<%=data.getPid() %>">
+                                   <h6><%=data.getPname() %> test</h6>
+                               </a>
+                               <p><%=data.getPrice() %>원</p>
+                           </div>
+                       </div>
+                   </div>
                 <%}
-				}
-				else if(category.equals("Bottom"))
-				{
-					list = pdao.productSelect(category);
-					for(int i=0; i < list.size(); i++){
-					data = list.get(i);%>
-	                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-	                    <div class="single-product-item">
-	                        <figure>
-	                            <a href="#"><img src = "<%= data.getProduct_img()%>" alt=""></a>
-	                            <div class="p-status">new</div>
-	                        </figure>
-                        	<div class="product-text">
-                            	<h6><%=data.getPname() %></h6>
-                            	<p><%=data.getPrice() %>원</p>
-                        	</div>
-                    	</div>
-	                </div>
+            }
+            else if(category.equals("Bottom"))
+            {
+               list = pdao.productSelect(category);
+               for(int i=0; i < list.size(); i++){
+               data = list.get(i);%>
+                   <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                       <div class="single-product-item">
+                           <figure>
+                               <div class="p-status">new</div>
+                               <div class="hover-icon">
+                                <a href="<%= data.getProduct_img()%>" class="pop-up"><img src = "<%= data.getProduct_img()%>" alt=""></a>
+                               </div>  
+                           </figure>
+                           <div class="product-text">
+                               <a href="ProductDetail?pid=<%=data.getPid() %>">
+                                   <h6><%=data.getPname() %> test</h6>
+                               </a>
+                               <p><%=data.getPrice() %>원</p>
+                           </div>
+                       </div>
+                   </div>
                 <%}
-				}
-				else if(category.equals("Shoes"))
-				{
-					list = pdao.productSelect(category);
-					for(int i=0; i < list.size(); i++){
-					data = list.get(i);%>
-	                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-	                    <div class="single-product-item">
-	                        <figure>
-	                            <a href="#"><img src = "<%= data.getProduct_img()%>" alt=""></a>
-	                            <div class="p-status">new</div>
-	                        </figure>
-                        	<div class="product-text">
-                            	<h6><%=data.getPname() %></h6>
-                            	<p><%=data.getPrice() %>원</p>
-                        	</div>
-                    	</div>
-	                </div>
+            }
+            else if(category.equals("Shoes"))
+            {
+               list = pdao.productSelect(category);
+               for(int i=0; i < list.size(); i++){
+               data = list.get(i);%>
+                   <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                       <div class="single-product-item">
+                           <figure>
+                               <div class="p-status">new</div>
+                               <div class="hover-icon">
+                                <a href="<%= data.getProduct_img()%>" class="pop-up"><img src = "<%= data.getProduct_img()%>" alt=""></a>
+                               </div>  
+                           </figure>
+                           <div class="product-text">
+                               <a href="ProductDetail?pid=<%=data.getPid() %>">
+                                   <h6><%=data.getPname() %> test</h6>
+                               </a>
+                               <p><%=data.getPrice() %>원</p>
+                           </div>
+                       </div>
+                   </div>
                 <%}
-				}
-				else
-				{
-					list = pdao.selectProductAll();
-					for(int i=0; i < list.size(); i++){
-					data = list.get(i);%>
-	                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-	                    <div class="single-product-item">
-	                        <figure>
-	                            <a href="#"><img src = "<%= data.getProduct_img()%>" alt=""></a>
-	                            <div class="p-status">new</div>
-	                        </figure>
-                        	<div class="product-text">
-                            	<h6><%=data.getPname() %></h6>
-                            	<p><%=data.getPrice() %>원</p>
-                        	</div>
-                    	</div>
-	                </div>
+            }
+            else
+            {
+               list = pdao.selectProductAll();
+               for(int i=0; i < list.size(); i++){
+               data = list.get(i);%>
+                   <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                       <div class="single-product-item">
+                           <figure>
+                               <div class="p-status">new</div>
+                               <div class="hover-icon">
+                                <a href="<%= data.getProduct_img()%>" class="pop-up"><img src = "<%= data.getProduct_img()%>" alt=""></a>
+                               </div>  
+                           </figure>
+                           <div class="product-text">
+                               <a href="ProductDetail?pid=<%=data.getPid() %>">
+                                   <h6><%=data.getPname() %> test</h6>
+                               </a>
+                               <p><%=data.getPrice() %>원</p>
+                           </div>
+                       </div>
+                   </div>
                 <%}
-				}
-			%>
+            }
+         %>
             </div>
         </div>
     </section>

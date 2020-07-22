@@ -15,9 +15,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
+                            <h1>2020</h1>
                             <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <a href="Product?value=All" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -26,9 +26,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
+                            <h1>2020</h1>
                             <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <a href="Product?value=All" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -37,9 +37,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
+                            <h1>2020</h1>
                             <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <a href="Product?value=All" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -81,47 +81,7 @@
             </div>
         </div>
         <!-- Features Box -->
-        <div class="features-box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="single-box-item first-box">
-                                    <img src="img/f-box-1.jpg" alt="">
-                                    <div class="box-text">
-                                        <span class="trend-year">2019 Party</span>
-                                        <h2>Jewelry</h2>
-                                        <span class="trend-alert">Trend Allert</span>
-                                        <a href="#" class="primary-btn">See More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="single-box-item second-box">
-                                    <img src="img/f-box-2.jpg" alt="">
-                                    <div class="box-text">
-                                        <span class="trend-year">2019 Trend</span>
-                                        <h2>Footwear</h2>
-                                        <span class="trend-alert">Bold & Black</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="single-box-item large-box">
-                            <img src="img/f-box-3.jpg" alt="">
-                            <div class="box-text">
-                                <span class="trend-year">2019 Party</span>
-                                <h2>Collection</h2>
-                                <div class="trend-alert">Trend Allert</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <!-- Features Section End -->
 	<%ArrayList<ProductDTO> plist = (ArrayList<ProductDTO>) request.getAttribute("plist");%>
@@ -175,25 +135,7 @@
 </head>
 
 <body>
-    <!-- Page Add Section Begin -->
-    <section class="page-add">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="page-breadcrumb">
-                        <h2>Dresses<span>.</span></h2>
-                        <a href="#">Home</a>
-                        <a href="#">Dresses</a>
-                        <a class="active" href="#">Night Dresses</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <img src="img/add.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page Add Section End -->
+    
 
     <!-- Categories Page Section Begin -->
     <section class="categories-page spad">
@@ -260,7 +202,7 @@
                           	<a href="ProductDetail?pid=${plist[i].pid}">
                                 <h6>${plist[i].pname} test</h6>
                             </a>
-                            <p>$ ${plist[i].price}</p>
+                            <p> ${plist[i].price}원</p>
                         </div>
                     </div>
                 </div>
@@ -282,7 +224,7 @@
 		                                    <a href="ProductDetail?pid=${plist[index].pid}">
 		                                        <h6>${plist[index].pname}</h6>
 		                                    </a>
-		                                    <p>$ ${plist[index].price}</p>
+		                                    <p> ${plist[index].price}원</p>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -306,7 +248,7 @@
 			                        <a href="ProductDetail?pid=${plist[index].pid}">
 			                            <h6>${plist[index].pname}</h6>
 			                        </a>
-			                        <p>$ ${plist[index].price}</p>
+			                        <p>${plist[index].price}원</p>
 			                    </div>
 			                </div>
 		                </div>
