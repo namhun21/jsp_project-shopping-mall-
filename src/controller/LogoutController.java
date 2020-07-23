@@ -24,7 +24,7 @@ public class LogoutController extends HttpServlet {
 			session.invalidate();
 			System.out.println("세션종료");
 		}
-		response.sendRedirect("login");
+		response.sendRedirect("main");
 	}
 
 	/**

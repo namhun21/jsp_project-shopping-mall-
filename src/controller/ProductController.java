@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ProductController
@@ -16,25 +17,34 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd;
-		String a = "All";
-		if (request.getParameter("value").equals("Top")) {
-			System.out.println("1");
-			a = request.getParameter("value");
-			request.setAttribute("a", "Top");
-		} else if (request.getParameter("value").equals("Bottom")) {
-			System.out.println("2");
-			request.setAttribute("a", "Bottom");
-		} else if (request.getParameter("value").equals("Shoes")) {
-			System.out.println("3");
-			request.setAttribute("a", "Shoes");
-		} else {
-			System.out.println("4");
-			request.setAttribute("a", "All");
+		
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("userid");
+		if(userid == null) {
+			response.sendRedirect("login");
 		}
+		else {
+			RequestDispatcher rd;
+			String a = "All";
+			if (request.getParameter("value").equals("Top")) {
+				System.out.println("1");
+				a = request.getParameter("value");
+				request.setAttribute("a", "Top");
+			} else if (request.getParameter("value").equals("Bottom")) {
+				System.out.println("2");
+				request.setAttribute("a", "Bottom");
+			} else if (request.getParameter("value").equals("Shoes")) {
+				System.out.println("3");
+				request.setAttribute("a", "Shoes");
+			} else {
+				System.out.println("4");
+				request.setAttribute("a", "All");
+			}
 
-		rd = request.getRequestDispatcher("WEB-INF/jsp/client/product.jsp");
-		rd.forward(request, response);
+			rd = request.getRequestDispatcher("WEB-INF/jsp/client/product.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	/**

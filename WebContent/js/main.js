@@ -19,8 +19,8 @@
         $("#preloder").delay(200).fadeOut("slow");
 
         /*------------------
-		    Product filter
-	    --------------------*/
+          Product filter
+       --------------------*/
         if ($('#product-list').length > 0) {
             var containerEl = document.querySelector('#product-list');
             var mixer = mixitup(containerEl);
@@ -36,27 +36,27 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+      Navigation
+   --------------------*/
     $(".mobile-menu").slicknav({
         appendTo: '.header-section',
         allowParentLinks: true,
         closedSymbol: '<i class="fa fa-angle-right"></i>',
-		openedSymbol: '<i class="fa fa-angle-down"></i>'
+      openedSymbol: '<i class="fa fa-angle-down"></i>'
     });
 
     /*------------------
-		Search model
-	--------------------*/
-	$('.search-trigger').on('click', function() {
-		$('.search-model').fadeIn(400);
-	});
+      Search model
+   --------------------*/
+   $('.search-trigger').on('click', function() {
+      $('.search-model').fadeIn(400);
+   });
 
-	$('.search-close-switch').on('click', function() {
-		$('.search-model').fadeOut(400,function(){
-			$('#search-input').val('');
-		});
-	});
+   $('.search-close-switch').on('click', function() {
+      $('.search-model').fadeOut(400,function(){
+         $('#search-input').val('');
+      });
+   });
 
     /*------------------
         Carousel Slider
@@ -81,10 +81,10 @@
     --------------------*/
     $(".logo-items").owlCarousel({
         loop: true,
-		nav: false,
-		dots: false,
-		margin : 40,
-		autoplay: true,
+      nav: false,
+      dots: false,
+      margin : 40,
+      autoplay: true,
         responsive: {
             0: {
                 items: 2
@@ -123,24 +123,27 @@
     });
 
     /*-------------------
-		Sort Select
-	--------------------- */
+      Sort Select
+   --------------------- */
     $('.sort').niceSelect();
 
     /*-------------------
-		Cart Select
-	--------------------- */
+      Cart Select
+   --------------------- */
     $('.cart-select').niceSelect();
 
     /*-------------------
-		Quantity change
-	--------------------- */
+      Quantity change
+   --------------------- */
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var costPrice = $button.parent().parent().parent().children("#cost-price").text();
+        costPrice = costPrice.substring(0,costPrice.length-1);
+        var productPrice;
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
@@ -151,12 +154,14 @@
                 newVal = 0;
             }
         }
+        productPrice = Number(costPrice) * newVal;
         $button.parent().find('input').val(newVal);
+        $button.parent().parent().next().text(productPrice+"원");
     });
 
     /*-------------------
-		Radio Btn
-	--------------------- */
+      Radio Btn
+   --------------------- */
     $(".shipping-info .cs-item label").on('click', function () {
         $(".shipping-info .cs-item label").removeClass('active');
         $(this).addClass('active');

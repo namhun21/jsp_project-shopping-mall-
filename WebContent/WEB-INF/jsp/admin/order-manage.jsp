@@ -82,10 +82,11 @@
                                 <tr>
                                     <th scope="col">주문번호</th>
                                     <th scope="col">주문자</th>
+                                    <th scope="col">주문날짜</th>
                                     <th scope="col">핸드폰번호</th>
                                     <th scope="col">주소</th>
                                     <th scope="col">수량</th>
-                                    <th scope="col">삭제</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,41 +94,13 @@
                             	<tr>
                                     <th scope="row"><b>${listAll.orderid }</b></th>
                                     <td><b>${listAll.userid }</b></td>
+                                    <td><b>${listAll.orderdate }</b></td>
                                     <td><b>${listAll.orderphon }</b></td>
                                     <td>${listAll.address }</td>
                                     <td>${listAll.amount }</td>
-                                    <td><button type="button" class="delete_${listAll.userid}_btn"
-											data-userid="${listAll.userid}">배송 완료</button></td>                                   
+                                                                       
                                 </tr>    
-                                <script type = "text/javascript">
-											$(".delete_${listAll.userid}_btn").click(function() {
-																var confirm_val = confirm("정말 삭제하시겠습니까?");
-																if (confirm_val) {
-												
-																	var userid = $(this).attr("data-userid");
-																	console.log(userid);
-																	$.ajax({
-																				url : "completeorder",
-																				type : "post",
-																				dataType : "json",
-																				async : false,
-																				data : {
-																					userid : userid
-																				},
-																				success : function(result) {
-																					if (result == 1) {
-																						location.href = "ordermanage";
-																					} else {
-																						alert("삭제 실패");
-																					}
-																				},
-																				error : function() {
-																					alert("삭제를 할 수 없습니다.");
-																				}
-																			});
-																}
-															});
-										</script>                            
+                                                           
                             	</c:forEach>
                             </tbody>
                         </table>    

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ContactController
@@ -18,10 +19,15 @@ public class ContactController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/contact.jsp");
-		rd.forward(request, response);
-		;
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("userid");
+		if(userid == null) {
+			response.sendRedirect("login");
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/contact.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

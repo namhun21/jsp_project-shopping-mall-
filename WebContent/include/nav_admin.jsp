@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <div class="inner-header">
                 <div class="logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    <a href="productmanage"><img src="img/logo.png" alt=""></a>
                 </div>
                 <div class="header-right">
                     <img src="img/icons/search.png" alt="" class="search-trigger">
@@ -42,7 +42,7 @@
                         <li><a href="productmanage">상품관리</a></li>
                         <li><a href="productregist">상품등록</a></li>
                         <li><a href="usermanage">사용자관리</a></li>
-                        <li><a href="#">주문관리</a></li>
+                        <li><a href="ordermanage">주문관리</a></li>
                     </ul>
                 </nav>
             </div>

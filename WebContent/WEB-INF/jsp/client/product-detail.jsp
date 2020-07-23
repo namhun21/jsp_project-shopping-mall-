@@ -132,7 +132,7 @@
                     <div class="product-content">
                         <h2>${product.pname }</h2>
                         <div class="pc-meta">
-                            <h5>$22.90</h5>
+                            <h5>${product.price}원</h5>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>

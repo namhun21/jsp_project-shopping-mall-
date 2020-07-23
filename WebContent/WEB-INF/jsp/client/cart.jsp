@@ -100,17 +100,18 @@
                                     <h5>${clist[index].pName}</h5>
                                 </div>
                             </td>
-                            <td class="price-col">${clist[index].price}원</td>
+                            <td class="price-col" id="cost-price">${clist[index].price}원</td>
                             <td class="quantity-col">
                                 <div class="pro-qty">
                                    <span class = "dec qtybtn"></span>
                                     <input type="text" value ="${clist[index].pCount}" Id = "count${index}">
                                     <span class = "inc qtybtn"></span>
-                                    <button class="btn btn-light" type="button" onclick="changecount(${index},${clist[index].cartId})">수정</button>
+                                    <!-- <button class="btn btn-light" type="button" onclick="changecount(${index},${clist[index].cartId})">수정</button> -->
                                 </div>             
                             </td>
-                            <td class="total">${clist[index].pCount*clist[index].price}원</td>
+                            <td class="total" >${clist[index].pCount*clist[index].price}원</td>
                             <c:set var = "totalprice" value = "${totalprice + clist[index].pCount*clist[index].price}" />
+                            <td class="product-close"><button class="btn btn-light" type="button" href = "Cart" onclick="changecount(${index},${clist[index].cartId})" style="color: black">수정</button></td>
                             <td class="product-close"><a href = "Cart" onclick="deleteproduct(${clist[index].cartId})" style="color: black">x</a></td>
                         </tr>
                     </tbody>

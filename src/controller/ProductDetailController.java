@@ -21,22 +21,27 @@ public class ProductDetailController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String productID = request.getParameter("pid");
-
-		ProductDAO dao = ProductDAO.getInstance();
-		ProductDTO pdto = dao.selectProduct(productID);
-		ArrayList<ProductCommentDTO> cdto = dao.selectCommentAll();
-		
 		HttpSession session = request.getSession();
-	    String uid = (String)session.getAttribute("userid");
+		String uid = (String)session.getAttribute("userid");
+		if(uid == null) {
+			response.sendRedirect("login");
+		}
+		else {
+			String productID = request.getParameter("pid");
 
-		request.setAttribute("product", pdto);
-		request.setAttribute("comment", cdto);
-		request.setAttribute("userid", uid);
+			ProductDAO dao = ProductDAO.getInstance();
+			ProductDTO pdto = dao.selectProduct(productID);
+			ArrayList<ProductCommentDTO> cdto = dao.selectCommentAll();
+			
 
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/product-detail.jsp");
-		rd.forward(request, response);
+			request.setAttribute("product", pdto);
+			request.setAttribute("comment", cdto);
+			request.setAttribute("userid", uid);
+
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/client/product-detail.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

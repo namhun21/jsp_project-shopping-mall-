@@ -140,7 +140,7 @@ private static OrderDAO orderDAO;
 			
 			List<OrderDTO> list = null;
 			//String sql = "select * from users where rownum<=3 and usersequence between ? and ? and isdelete = 0";
-			String sql = "select * from (select rownum as rnum, A.* from (select * from oredrs)A  )B where B.rnum between ? and ?";
+			String sql = "select * from (select rownum as rnum, A.* from (select * from orders)A  )B where B.rnum between ? and ?";
 			try {
 				conn = DBconnection.getInstance().getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -153,8 +153,10 @@ private static OrderDAO orderDAO;
 					OrderDTO orderDTO = new OrderDTO();
 					orderDTO.setOrderid(rs.getString("orderid"));
 					orderDTO.setUserid(rs.getString("userid"));
+					orderDTO.setPid(rs.getString("pid"));
+					orderDTO.setOrderdate(rs.getString("orderdate"));
 					//orderDTO.setUserName(rs.getString("username"));
-					orderDTO.setAddress(rs.getString("address"));
+					orderDTO.setAddress(rs.getString("useraddress"));
 					orderDTO.setOrderphon(rs.getString("orderphon"));
 					orderDTO.setAmount(rs.getString("amount"));
 					list.add(orderDTO);	

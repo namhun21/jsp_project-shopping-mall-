@@ -19,7 +19,7 @@ public class CompleteOrderController extends HttpServlet {
 		OrderDAO orderDAO = OrderDAO.getInstance();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		String userid = request.getParameter("userid");
+		String orderid = request.getParameter("orderid");
 		try {
 			//orderDAO.deleteProduct(pId);
 		} catch (Exception e) {

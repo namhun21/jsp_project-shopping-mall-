@@ -19,36 +19,44 @@ import order.dao.OrderDAO;
 public class CartController extends HttpServlet {
    protected void doGet(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
-      RequestDispatcher rd;
-      String pcount = (request.getParameter("count"));
-      String cartid = (request.getParameter("cartid"));
-      System.out.println(pcount+" "+cartid);
-      CartDAO cdao = CartDAO.getInstance();
-      HttpSession session = request.getSession();
-      String uid = (String)session.getAttribute("userid");
+	   
+	  HttpSession session = request.getSession();
+	  String uid = (String)session.getAttribute("userid");
+	  if(uid == null) {
+			response.sendRedirect("login");
+	  } 
+	  else {
+		  RequestDispatcher rd;
+	      String pcount = (request.getParameter("count"));
+	      String cartid = (request.getParameter("cartid"));
+	      System.out.println(pcount+" "+cartid);
+	      CartDAO cdao = CartDAO.getInstance();
+	      
+	      
+	      OrderDAO odao = OrderDAO.getInstance();
+	      ArrayList<CartDTO> clist;
+	      CartDTO data = new CartDTO();
+	      clist = cdao.cartSelect(uid);
+	      request.setAttribute("clist", clist);
+	      System.out.println(clist);
+	      if (clist.isEmpty()) {
+	         rd = request.getRequestDispatcher("WEB-INF/jsp/client/cart2.jsp");
+	         rd.forward(request, response);
+	      } else {
+	         request.setAttribute("clist", clist);
+	         rd = request.getRequestDispatcher("WEB-INF/jsp/client/cart.jsp");
+	         rd.forward(request, response);
+	      }
+	      if(pcount !=null && cartid !=null)
+	      {
+	         cdao.cartUpdate(Integer.parseInt(pcount), Integer.parseInt(cartid));
+	      }
+	      else if(cartid != null)
+	      {
+	         cdao.cartpartDelete(Integer.parseInt(cartid));
+	      }
+	  }
       
-      OrderDAO odao = OrderDAO.getInstance();
-      ArrayList<CartDTO> clist;
-      CartDTO data = new CartDTO();
-      clist = cdao.cartSelect(uid);
-      request.setAttribute("clist", clist);
-      System.out.println(clist);
-      if (clist.isEmpty()) {
-         rd = request.getRequestDispatcher("WEB-INF/jsp/client/cart2.jsp");
-         rd.forward(request, response);
-      } else {
-         request.setAttribute("clist", clist);
-         rd = request.getRequestDispatcher("WEB-INF/jsp/client/cart.jsp");
-         rd.forward(request, response);
-      }
-      if(pcount !=null && cartid !=null)
-      {
-         cdao.cartUpdate(Integer.parseInt(pcount), Integer.parseInt(cartid));
-      }
-      else if(cartid != null)
-      {
-         cdao.cartpartDelete(Integer.parseInt(cartid));
-      }
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response)
