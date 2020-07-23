@@ -77,7 +77,7 @@
                     <h3>상품 리스트</h3>
                     (총 레코드 수 : <%= count %>)
                 </div>
-                <table class="table">
+                <table class="table table-hover" >
                             <thead>
                                 <tr>
                                     <th scope="col">상품명</th>
@@ -99,7 +99,7 @@
                                     <c:if test="${listAll.categorycode == 'SHOES' }">신발</c:if>
                                     </b></td>
                                     <td><b>${listAll.price }</b></td>
-                                    <td>${listAll.pcontent }</td>
+                                    <td width = "40%">${listAll.pcontent }</td>
                                     <td>${listAll.product_hit }</td>
                                     <td>${listAll.product_reply_cnt }</td> 
                                     <td><button type="button" class="delete_${listAll.pid}_btn"

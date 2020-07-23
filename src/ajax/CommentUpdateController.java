@@ -21,6 +21,8 @@ public class CommentUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+	    response.setCharacterEncoding("utf-8");
 		String commentValue = request.getParameter("comment");
 		String pid = request.getParameter("pid");
 		

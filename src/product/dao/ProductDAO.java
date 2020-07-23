@@ -253,7 +253,7 @@ public class ProductDAO {
 				dto.setPid(rs.getString("pid"));
 				dto.setPname(rs.getString("pname"));
 				dto.setPrice(rs.getInt("price"));
-				// dto.setPcontent(rs.getString("pcontent"));
+				dto.setPcontent(rs.getString("pcontent"));
 				dto.setProduct_hit(rs.getInt("product_hit"));
 				dto.setProduct_img(rs.getString("product_img"));
 				dto.setProduct_regist(rs.getString("product_regist"));

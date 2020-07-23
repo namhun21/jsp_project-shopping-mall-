@@ -94,9 +94,9 @@
                             	<tr>
                                     <th scope="row"><b>${listAll.orderid }</b></th>
                                     <td><b>${listAll.userid }</b></td>
-                                    <td><b>${listAll.orderdate }</b></td>
+                                    <td width = "15%"><b>${listAll.orderdate }</b></td>
                                     <td><b>${listAll.orderphon }</b></td>
-                                    <td>${listAll.address }</td>
+                                    <td width = "30%">${listAll.address }</td>
                                     <td>${listAll.amount }</td>
                                                                        
                                 </tr>    

@@ -53,7 +53,7 @@
                            </figure>
                            <div class="product-text">
                               <a href="ProductDetail?pid=<%=data.getPid() %>">
-                                   <h6><%=data.getPname() %> test</h6>
+                                   <h6><%=data.getPname() %> </h6>
                                </a>
                                <p><%=data.getPrice() %>원</p>
                            </div>
@@ -76,7 +76,7 @@
                            </figure>
                            <div class="product-text">
                                <a href="ProductDetail?pid=<%=data.getPid() %>">
-                                   <h6><%=data.getPname() %> test</h6>
+                                   <h6><%=data.getPname() %> </h6>
                                </a>
                                <p><%=data.getPrice() %>원</p>
                            </div>
@@ -99,7 +99,7 @@
                            </figure>
                            <div class="product-text">
                                <a href="ProductDetail?pid=<%=data.getPid() %>">
-                                   <h6><%=data.getPname() %> test</h6>
+                                   <h6><%=data.getPname() %></h6>
                                </a>
                                <p><%=data.getPrice() %>원</p>
                            </div>
@@ -122,7 +122,7 @@
                            </figure>
                            <div class="product-text">
                                <a href="ProductDetail?pid=<%=data.getPid() %>">
-                                   <h6><%=data.getPname() %> test</h6>
+                                   <h6><%=data.getPname() %> </h6>
                                </a>
                                <p><%=data.getPrice() %>원</p>
                            </div>

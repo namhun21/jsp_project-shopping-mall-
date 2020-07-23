@@ -91,7 +91,7 @@
                             	<tr>
                                     <th scope="row"><b>${listAll.userId }</b></th>
                                     <td><b>${listAll.userName }</b></td>
-                                    <td><b>${listAll.userAddress }</b></td>
+                                    <td width = "30%"><b>${listAll.userAddress }</b></td>
                                     <td>${listAll.userPhNumber }</td>
                                     <td>${listAll.userEmail }</td>
                                     <td>

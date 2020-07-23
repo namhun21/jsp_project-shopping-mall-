@@ -156,7 +156,7 @@
         }
         productPrice = Number(costPrice) * newVal;
         $button.parent().find('input').val(newVal);
-        $button.parent().parent().next().text(productPrice+"원");
+//        $button.parent().parent().next().text(productPrice+"원");
     });
 
     /*-------------------

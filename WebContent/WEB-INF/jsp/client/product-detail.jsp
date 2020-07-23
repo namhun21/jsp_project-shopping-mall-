@@ -52,7 +52,7 @@
 			success : function(data){
 				alert('등록되었습니다.');
 				console.log(data[0]);
-				$('#commentSpace').prepend("<input type='text' disabled value="+data.comments+">");
+				$('#commentSpace').prepend("<input type='text' disabled value='"+data.comments+"'>");
 				$('#commentSpace').prepend(year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds+"&nbsp;&nbsp;&nbsp; WRITER : "+userid);
 				
 				commentValue.placeholder ="Write your comment";
@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="page-breadcrumb">
-                        <h2>Shirts<span>.</span></h2>
+                        <h2>${product.categorycode }<span>.</span></h2>
                         <a href="#">Home</a>
                         <a href="#">Dresses</a>
                         <a class="active" href="#">Night Dresses</a>
@@ -141,9 +141,7 @@
                                 <i class="fa fa-star"></i>
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                            viverra maecenas accumsan lacus vel facilisis.</p>
+                        <p>${product.pcontent }</p>
                         <ul class="tags">
                             <li><span>Category :</span> ${product.categorycode}</li>
                             <li><span>Tags :</span> man, shirt, dotted, elegant, cool</li>

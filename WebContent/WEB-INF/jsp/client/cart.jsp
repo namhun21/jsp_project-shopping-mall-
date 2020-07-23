@@ -267,6 +267,29 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/mixitup.min.js"></script>
     <script src="js/main.js"></script>
+       <script type="text/javascript">
+
+   var proQty = $('.pro-qty');
+   proQty.on('click', '.qtybtn', function () {
+       var $button = $(this);
+       var oldValue = $button.parent().find('input').val();
+       var costPrice = $button.parent().parent().parent().children("#cost-price").text();
+       costPrice = costPrice.substring(0,costPrice.length-1);
+       var productPrice;
+       if ($button.hasClass('inc')) {
+           var newVal = parseFloat(oldValue);
+       } else {
+           // Don't allow decrementing below zero
+           if (oldValue > 0) {
+               var newVal = parseFloat(oldValue);
+           } else {
+               newVal = 0;
+           }
+       }
+       productPrice = Number(costPrice) * newVal;
+       $button.parent().find('input').val(newVal);
+       $button.parent().parent().next().text(productPrice+"원");
+   });</script>
 
 </body>
 
